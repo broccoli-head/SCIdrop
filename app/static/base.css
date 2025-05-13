@@ -32,3 +32,9 @@ nav {
     display: flex;
     align-items: center;
 }
+
+a {
+    color: #FECD7E;
+    text-decoration: none;
+    font-weight: bold;
+}

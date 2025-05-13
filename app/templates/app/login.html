@@ -19,16 +19,18 @@
     </div>
     {% endif %}
 
-    <h1 class="orange">LOGIN</h1>
+    <h1 class="boldTitle orange">LOGIN</h1>
     <form class="login" method="post">
         {% csrf_token %}
         {{ form.as_p }}
+
         <div class="rememberMe">
             <input type="checkbox" name="rememberMe" checked>
             <label>Remember me</label><br>
         </div>
         <button type="submit">Log in</button>
-        <p>Don't have an account? <a href="/register">Register here</a></p>
+        <p>Don't have an account?<br>
+        <a href="/register">Register here</a></p>
     </form>
 </div>
 {% endblock %}
