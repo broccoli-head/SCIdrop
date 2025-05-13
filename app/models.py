@@ -1,3 +1,6 @@
 from django.db import models
+import json
 
-# Create your models here.
+class Chest(models.Model):
+    name = models.CharField(max_length = 100)
+    content = models.JSONField()

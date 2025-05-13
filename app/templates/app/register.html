@@ -1,0 +1,30 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{%block additional %}
+    <link rel="stylesheet" href="{% static 'form.css' %}">
+{% endblock %}
+
+{% block webTitle %}Sign up on SCIdrop{% endblock %}
+
+
+{% block content %}
+<div class="centeredBox">
+    {% if user.is_authenticated %}
+    <div class="warning">
+        <img src="{% static 'icons/warning.svg' %}">
+        <p>
+            You are logged now as <span class="bold">{{ user.username }}</span>
+        </p>
+    </div>
+    {% endif %}
+
+    <h1 class="orange">Sign up</h1>
+    <form method="post" class="login">
+        {% csrf_token %}
+        <p>If you have already an account, you can <a href="/login">log in here</a>.</p>
+        {{ form.as_p }}
+        <button type="submit">Sign up</button>
+    </form>
+</div>
+{% endblock %}
