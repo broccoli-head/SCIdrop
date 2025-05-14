@@ -9,7 +9,7 @@
 
 
 {% block content %}
-<div class="centeredBox">
+<div class="centeredBox register">
     {% if user.is_authenticated %}
     <div class="warning">
         <img src="{% static 'icons/warning.svg' %}">
@@ -24,6 +24,7 @@
         {% csrf_token %}
         <p>If you have already an account, you can <a href="/login">log in here</a>.</p>
         {{ form.as_p }}
+        <br>
         <button type="submit">Sign up</button>
     </form>
 </div>

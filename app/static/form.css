@@ -1,19 +1,22 @@
 body {
+    background-image: url(images/login_background.png);
+    background-size: cover;
+}
+
+main {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 90vh;
-    background-image: url(images/login_background.png);
-    background-size: cover;
+    height: 80vh;
 }
 
 input {
     background-color: rgb(111, 111, 111);
     padding: 10px;
     margin-left: 5px;
-    float: right;
     border: none;
     border-radius: 10px;
+    color: white;
 }
 input[type="checkbox"] {
     float: left;
@@ -25,14 +28,9 @@ label {
 }
 
 button {
-    background-color: #FECD7E;
-    padding: 10px;
-    margin-top: 20px;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    font-family: "Arial Black";
-    border-radius: 10px;
 }
 
 .centeredBox {
@@ -41,19 +39,16 @@ button {
     border: solid 3px rgba(255, 255, 255, 0.4);
     width: fit-content;
     padding: 20px;
-    width: 350px;
+    width: 300px;
     border-radius: 20px;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
 
 .centeredBox h1 {
     text-align: center;
     letter-spacing: 2px;
-}
-
-.centeredBox p {
-    text-align: center;
 }
 
 form ul, .helptext {
@@ -67,4 +62,14 @@ form .errorlist {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+.rememberMe {
+    text-align: left;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+.register {
+    width: 450px;
 }

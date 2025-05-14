@@ -3,16 +3,7 @@
 {% block webTitle %}SCIdrop - home page{% endblock %}
 
 {% block content %}
-<nav>
-    <div class="logo">
-        <img src="{% static 'icons/gift.svg' %}">
-        <h1 class="boldTitle">
-            <span class="orange">sci</span>drop
-        </h1>
-    </div>
-    
-    <a href="/login"><button>Login</button></a>
-    <a href="/register"><button>Sign up</button></a>
-</nav>
-
+    {% for chest in chests %}
+    <p>{{ chest.name }}</p>
+    {% endfor %}
 {% endblock %}

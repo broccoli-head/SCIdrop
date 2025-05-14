@@ -11,8 +11,25 @@
     
     <title>{% block webTitle %}{% endblock %}</title>
 </head>
+
 <body>
-    {% block content %}
-    {% endblock %}
+    <nav>
+        <div class="logo">
+            <img src="{% static 'icons/gift.svg' %}">
+            <h1 class="boldTitle">
+                <a href="/">
+                    <span class="orange">sci</span><span class="white">drop</span>
+                </a>        
+            </h1>
+        </div>
+        
+        <a href="/login"><button>Login</button></a>
+        <a href="/register"><button>Sign up</button></a>
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 </body>
 </html>

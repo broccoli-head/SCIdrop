@@ -1,4 +1,6 @@
 body {
+    margin: 0;
+    padding: 0;
     background-color: #1A191F;
     color: white;
     font-family: "Calibri";
@@ -8,7 +10,7 @@ body {
     display: flex;
     gap: 8px;
     align-items: center;
-    margin-left: 20px;
+    margin-left: 40px;
 }
 
 .logo img {
@@ -27,14 +29,31 @@ body {
 .orange{
     color: #FECD7E;
 }
+.white {
+    color: white;
+}
 
 nav {
     display: flex;
     align-items: center;
+    width: 100vw;
+    gap: 15px;
+    backdrop-filter: blur(5px);
+    background-color: rgba(106, 87, 69, 0.4);
+    border-bottom: solid 3px rgba(116, 116, 116, 0.4);
 }
 
 a {
     color: #FECD7E;
     text-decoration: none;
     font-weight: bold;
+}
+
+button {
+    background-color: #FECD7E;
+    padding: 10px;
+    font-family: "Arial Black";
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
 }

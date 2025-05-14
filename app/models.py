@@ -1,6 +1,9 @@
 from django.db import models
-import json
 
 class Chest(models.Model):
     name = models.CharField(max_length = 100)
-    content = models.JSONField()
+
+class Skin(models.Model):
+    chestID = models.ForeignKey(Chest, on_delete = models.CASCADE)
+    name = models.CharField(max_length = 100)
+    price = models.FloatField()

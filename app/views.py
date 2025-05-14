@@ -1,10 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from .models import Chest
 
 
 def home(request):
-    return render(request, 'app/home.html')
+    chests = Chest.objects.order_by('-id')[:10]
+    context = {
+        'chests': chests
+    }
+    return render(request, 'app/home.html', context)
 
 
 def userRegister(request):
