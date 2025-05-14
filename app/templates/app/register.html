@@ -2,7 +2,7 @@
 {% load static %}
 
 {%block additional %}
-    <link rel="stylesheet" href="{% static 'form.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/form.css' %}">
 {% endblock %}
 
 {% block webTitle %}Sign up on SCIdrop{% endblock %}
@@ -13,13 +13,11 @@
     {% if user.is_authenticated %}
     <div class="warning">
         <img src="{% static 'icons/warning.svg' %}">
-        <p>
-            You are logged now as <span class="bold">{{ user.username }}</span>
-        </p>
+        <h3>You are logged now as <span class="bold">{{ user.username }}</span></h3>
     </div>
     {% endif %}
 
-    <h1 class="boldTitle orange">Sign up</h1>
+    <h1 class="boldTitle orange">SIGN UP</h1>
     <form method="post" class="login">
         {% csrf_token %}
         <p>If you have already an account, you can <a href="/login">log in here</a>.</p>

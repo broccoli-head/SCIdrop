@@ -1,9 +1,26 @@
 {% extends "app/base.html" %}
 {% load static %}
+
+{%block additional %}
+    <link rel="stylesheet" href="{% static 'styles/chest.css' %}">
+{% endblock %}
+
 {% block webTitle %}SCIdrop - home page{% endblock %}
 
+
 {% block content %}
+<div id="chestList">
     {% for chest in chests %}
-    <p>{{ chest.name }}</p>
+    <div class="chestBox">
+        <h2>{{ chest.name }}</h2>
+        {% if chest.cover %}
+            <img src="{{ chest.cover.url }}">
+        {% else %}
+            <img src="{% static 'icons/chest.svg' %}">
+        {% endif %}
+        <p class="price">{{ chest.price }} ZŁ</p> 
+        <a href=""></a>
+    </div>
     {% endfor %}
+</div>
 {% endblock %}

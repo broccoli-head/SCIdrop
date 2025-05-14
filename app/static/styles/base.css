@@ -57,3 +57,11 @@ button {
     border-radius: 10px;
     cursor: pointer;
 }
+
+.warning {
+    color: #e93e00;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
