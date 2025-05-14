@@ -1,5 +1,5 @@
 # 🎁 About SCIdrop
-Simple website made with Django and Vue frameworks. It implements opening chests with customisable skins. Everything works on the user's account balance based on real currency.
+Simple website made with Django and Vue frameworks. It implements opening chests with customisable skins. Everything works on the user's account balance based on the real currency.
 
 # ⚙️ Setup guide
 <b>Install necessary libraries</b>
@@ -16,7 +16,7 @@ Simple website made with Django and Vue frameworks. It implements opening chests
 ```
 
 # 💡 Important - it's not an oversight but a feature
-Project includes lightweight database and media folder to provide two example chests with bunch of skins. You can easily delete them to start with a clean, new project.
+Project includes lightweight database and media folder to provide two example chests with a bunch of skins. You can easily delete them to start with a clean, new project.
 
 # 💻 Used technologies
 Frontend:
@@ -26,4 +26,4 @@ Frontend:
 
 Backend:
 - Python with Django
-- SQlite
+- SQLite
