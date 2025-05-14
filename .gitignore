@@ -4,4 +4,3 @@ migrations/
 
 # files
 .cache
-db.sqlite3
