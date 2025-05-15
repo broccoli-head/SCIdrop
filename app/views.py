@@ -61,7 +61,7 @@ def userLogout(request):
 
 def chestOpening(request, chestID):
     chest = Chest.objects.get(id = chestID)
-    skins = Skin.objects.get(chestID = chestID)
+    skins = Skin.objects.filter(chestID = chestID)
 
     context = {
         'chestInfo': chest,
