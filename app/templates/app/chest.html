@@ -1,0 +1,11 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block webTitle %}SCIdrop - home page{% endblock %}
+
+
+{% block content %}
+    {% for skin in skins}
+        <p>skin.name</p>
+    {% endfor %}
+{% endblock %}

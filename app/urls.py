@@ -7,5 +7,6 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('login/', views.userLogin, name='login'),
     path('register/', views.userRegister, name='register'),
-    path('logout/', views.userLogout, name='logout')
+    path('logout/', views.userLogout, name='logout'),
+    path('chest/<int:chestID>', views.chestOpening, name='chest')
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

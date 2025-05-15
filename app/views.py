@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import Chest
+from .models import Chest, Skin
 
 
 def home(request):
@@ -23,7 +23,11 @@ def userRegister(request):
     else:
         form = UserCreationForm()
 
-    return render(request, 'app/register.html', {'form': form})
+    context = {
+        'form': form
+    }
+
+    return render(request, 'app/register.html', context)
 
 
 
@@ -42,10 +46,25 @@ def userLogin(request):
             return redirect('/')
     else:
         form = AuthenticationForm()
+    
+    context = {
+        'form': form
+    }
 
-    return render(request, 'app/login.html', {'form': form})
+    return render(request, 'app/login.html', context)
 
 
 def userLogout(request):
     logout(request)
     return redirect('/')
+
+
+def chestOpening(request, chestID):
+    chest = Chest.objects.get(id = chestID)
+    skins = Skin.objects.get(chestID = chestID)
+
+    context = {
+        'chestInfo': chest,
+        'skins': skins
+    }
+    return render(request, 'app/chest.html', context)
