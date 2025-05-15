@@ -60,26 +60,26 @@ nav  {
     width: 200px
 }
 
-.chestBox .rarity {
+.rarity {
     font-size: 1.7em;
     font-family: "Arial Black";
     text-transform: uppercase;
     margin: 10px;
 }
 
-.chestBox .common {
+.common {
     color: rgb(72, 255, 124);
     text-shadow: 0 0 8px rgb(72, 255, 124);
 }
-.chestBox .rare {
+.rare {
     color: rgb(91, 146, 255);
     text-shadow: 0 0 8px rgb(39, 61, 190);
 }
-.chestBox .epic {
+.epic {
     color: rgb(198, 119, 255);
     text-shadow: 0 0 8px rgb(117, 35, 175);
 }
-.chestBox .legendary {
+.legendary {
     color: rgb(255, 138, 49);
     text-shadow: 0 0 8px rgb(252, 105, 42);
 }
