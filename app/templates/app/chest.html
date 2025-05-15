@@ -8,8 +8,8 @@
 {% endblock %}
 
 {% block content %}
-    {% for skin in skins}
-            <div class="chestBox">
+    {% for skin in skins %}
+        <div class="chestBox">
         <h2>{{ skin.name }}</h2>
         {% if skin.cover %}
             <img src="{{ skin.cover.url }}">

@@ -20,7 +20,7 @@
     <h1 class="boldTitle orange">SIGN UP</h1>
     <form method="post" class="login">
         {% csrf_token %}
-        <p>If you have already an account, you can <a href="/login">log in here</a>.</p>
+        <p>If you have already an account, you can <a href="{% url 'login' %}">log in here</a>.</p>
         {{ form.as_p }}
         <br>
         <button type="submit">Sign up</button>

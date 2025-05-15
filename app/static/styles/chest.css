@@ -1,3 +1,11 @@
+body {
+    background-image: url(../images/page_background.png);
+    background-size: cover;
+}
+nav  {
+    background-color: rgba(69, 56, 44, 0.8);
+}
+
 #chestList {
     display: flex;
     gap: 50px;
@@ -5,35 +13,73 @@
     margin-bottom: 0;
 }
 
+#chestList h1 {
+    color: #FECD7E;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .chestBox {
     width: 400px;
     height: 500px;
     border-radius: 20px;
-    background-color: #FECD7E;
+    background-color: rgba(254, 205, 126, 0.6);
+    backdrop-filter: blur(5px);
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .chestBox img {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
 }
 
 .chestBox h2 {
-    color: black;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    letter-spacing: 6px;
+    color: #ffcc00;
+    font-family: "Arial Black";
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-shadow: 0 0 10px #ffcc00;
     word-spacing: 10px;
     text-align: center;
+    font-size: 1.6em;
 }
 
 .chestBox .price {
-    font-size: 1.5em;
+    font-size: 1.3em;
+    margin: 10px;
     color: white;
     background-color: rgb(141, 87, 17);
     padding: 10px;
-    border-radius: 10px;
-    font-family: 'Courier New', Courier, monospace;
+    border-radius: 15px;
+    font-family: "Arial Black";
     font-weight: bold;
+    text-align: center;
+    width: 200px
+}
+
+.chestBox .rarity {
+    font-size: 1.7em;
+    font-family: "Arial Black";
+    text-transform: uppercase;
+    margin: 10px;
+}
+
+.chestBox .common {
+    color: rgb(72, 255, 124);
+    text-shadow: 0 0 8px rgb(72, 255, 124);
+}
+.chestBox .rare {
+    color: rgb(91, 146, 255);
+    text-shadow: 0 0 8px rgb(39, 61, 190);
+}
+.chestBox .epic {
+    color: rgb(198, 119, 255);
+    text-shadow: 0 0 8px rgb(117, 35, 175);
+}
+.chestBox .legendary {
+    color: rgb(255, 138, 49);
+    text-shadow: 0 0 8px rgb(252, 105, 42);
 }
