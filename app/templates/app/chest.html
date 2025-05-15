@@ -3,9 +3,19 @@
 
 {% block webTitle %}SCIdrop - home page{% endblock %}
 
+{% block additional %}
+<link rel="stylesheet" href="chest.css">
+{% endblock %}
 
 {% block content %}
     {% for skin in skins}
-        <p>skin.name</p>
+            <div class="chestBox">
+        <h2>{{ skin.name }}</h2>
+        {% if skin.cover %}
+            <img src="{{ skin.cover.url }}">
+        {% else %}
+            <img src="{% static 'icons/chest.svg' %}">
+        {% endif %}
+        <p class="price">{{ skin.price }} ZŁ</p> 
     {% endfor %}
 {% endblock %}
