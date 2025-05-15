@@ -64,7 +64,7 @@ def chestOpening(request, chestID):
     skins = Skin.objects.filter(chestID = chestID)
 
     context = {
-        'chestInfo': chest,
+        'chest': chest,
         'skins': skins
     }
     return render(request, 'app/chest.html', context)

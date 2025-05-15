@@ -1,0 +1,34 @@
+#skinList {
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 30px;
+    display: flex;
+    overflow: hidden;
+    border: solid 3px white;
+    box-shadow: 0 0 15px white;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.skinBox {
+    height: 400px;
+    background-color: #795316;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.skinBox img {
+    width: 100px;
+}
+
+#spin {
+    display: block;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    font-size: 2em;
+    border: 5px solid white;
+    box-shadow: 0 0 10px white;
+}

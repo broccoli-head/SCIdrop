@@ -1,15 +1,17 @@
 {% extends "app/base.html" %}
 {% load static %}
 
-{% block webTitle %}SCIdrop - home page{% endblock %}
+{% block webTitle %}SCIdrop - {{ chest.name }}{% endblock %}
 
 {% block additional %}
-<link rel="stylesheet" href="chest.css">
+    <link rel="stylesheet" href="{% static 'styles/roulette.css' %}">
+    <script src="https://unpkg.com/vue@3.4.21/dist/vue.global.prod.js"></script>
 {% endblock %}
 
 {% block content %}
+<div id="skinList">
     {% for skin in skins %}
-        <div class="chestBox">
+    <div class="skinBox">
         <h2>{{ skin.name }}</h2>
         {% if skin.cover %}
             <img src="{{ skin.cover.url }}">
@@ -17,5 +19,8 @@
             <img src="{% static 'icons/chest.svg' %}">
         {% endif %}
         <p class="price">{{ skin.price }} ZŁ</p> 
+    </div>
     {% endfor %}
+</div>
+<button id="spin">Spin</button>
 {% endblock %}
