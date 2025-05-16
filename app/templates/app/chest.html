@@ -6,8 +6,6 @@
 {% block additional %}
     <link rel="stylesheet" href="{% static 'styles/chests.css' %}">
     <link rel="stylesheet" href="{% static 'styles/roulette.css' %}">
-    <script src="https://unpkg.com/vue@3.4.21/dist/vue.global.prod.js"></script>
-    <script src="{% static 'scripts/script.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -26,5 +24,14 @@
     {% endfor %}
 </div>
 <button id="spin">Spin</button>
-<div id="app">{{ message }}</div>
+
+<div id="app">
+    {% verbatim %}
+        {{ message }}
+    {% endverbatim %}
+  </div>
+  
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="{% static 'scripts/script.js' %}"></script>
+
 {% endblock %}

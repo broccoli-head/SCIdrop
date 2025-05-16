@@ -3,6 +3,9 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import Chest, Skin
 
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
 
 def home(request):
     chests = Chest.objects.order_by('-id')[:10]
@@ -59,6 +62,7 @@ def userLogout(request):
     return redirect('/')
 
 
+@api_view(['GET'])
 def chestOpening(request, chestID):
     chest = Chest.objects.get(id = chestID)
     skins = Skin.objects.filter(chestID = chestID)
@@ -67,4 +71,4 @@ def chestOpening(request, chestID):
         'chest': chest,
         'skins': skins
     }
-    return render(request, 'app/chest.html', context)
+    return Response(context)
