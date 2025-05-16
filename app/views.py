@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import Chest, Skin
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+
+from .models import Chest
+from .serializers import ChestSerializer
 
 
 def home(request):
@@ -64,11 +66,10 @@ def userLogout(request):
 
 @api_view(['GET'])
 def chestOpening(request, chestID):
-    chest = Chest.objects.get(id = chestID)
-    skins = Skin.objects.filter(chestID = chestID)
+    try:
+        chest = Chest.objects.get(id = chestID)
+    except Chest.DoesNotExist:
+        return Response({'error': 'Chest not found'}, status = 404)
 
-    context = {
-        'chest': chest,
-        'skins': skins
-    }
-    return Response(context)
+    serializer = ChestSerializer(chest, context =  {'request': request})
+    return Response(serializer.data)

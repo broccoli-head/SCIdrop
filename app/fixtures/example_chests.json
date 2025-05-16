@@ -1,0 +1,341 @@
+[
+  {
+    "model": "app.chest",
+    "pk": 1,
+    "fields": {
+      "name": "Zakładnicy SU",
+      "price": "70.00",
+      "rarity": "epic",
+      "cover": "media/chestCovers/chest1.png"
+    }
+  },
+  {
+    "model": "app.chest",
+    "pk": 2,
+    "fields": {
+      "name": "Miniony SU",
+      "price": "10.00",
+      "rarity": "common",
+      "cover": "media/chestCovers/chest2.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 1,
+    "fields": {
+      "chestID": 1,
+      "name": "Miłosz",
+      "price": "400.00",
+      "rarity": "epic",
+      "cover": "media/skinCovers/ja.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 2,
+    "fields": {
+      "chestID": 1,
+      "name": "Łukasz R",
+      "price": "30.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/lukasz_rud.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 3,
+    "fields": {
+      "chestID": 1,
+      "name": "Michał Sz",
+      "price": "20.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/szubinski.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 4,
+    "fields": {
+      "chestID": 1,
+      "name": "Łukasz T",
+      "price": "30.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/lukasz.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 5,
+    "fields": {
+      "chestID": 1,
+      "name": "Big One",
+      "price": "60.00",
+      "rarity": "rare",
+      "cover": "media/skinCovers/mati.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 6,
+    "fields": {
+      "chestID": 1,
+      "name": "Wkurzony Big One",
+      "price": "400.00",
+      "rarity": "legendary",
+      "cover": "media/skinCovers/mati_wkurzony.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 7,
+    "fields": {
+      "chestID": 1,
+      "name": "Hubert",
+      "price": "40.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/hubert.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 8,
+    "fields": {
+      "chestID": 1,
+      "name": "Wakacyjny Kacper",
+      "price": "200.00",
+      "rarity": "epic",
+      "cover": "media/skinCovers/kacperstary.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 9,
+    "fields": {
+      "chestID": 1,
+      "name": "Kacper Classic",
+      "price": "100.00",
+      "rarity": "rare",
+      "cover": "media/skinCovers/kacper.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 10,
+    "fields": {
+      "chestID": 1,
+      "name": "Kowalski",
+      "price": "20.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/kowalski.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 11,
+    "fields": {
+      "chestID": 1,
+      "name": "Krzywnia",
+      "price": "20.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/krzywania.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 12,
+    "fields": {
+      "chestID": 1,
+      "name": "Pszczoła",
+      "price": "20.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/kubab.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 13,
+    "fields": {
+      "chestID": 1,
+      "name": "Jakub S",
+      "price": "20.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/kubajean.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 14,
+    "fields": {
+      "chestID": 1,
+      "name": "Mateusz L",
+      "price": "30.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/mateusz.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 15,
+    "fields": {
+      "chestID": 1,
+      "name": "Olaf",
+      "price": "5.00",
+      "rarity": "rare",
+      "cover": "media/skinCovers/olaf.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 16,
+    "fields": {
+      "chestID": 1,
+      "name": "Patryk",
+      "price": "20.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/patryk.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 17,
+    "fields": {
+      "chestID": 1,
+      "name": "Remek",
+      "price": "30.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/remek.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 18,
+    "fields": {
+      "chestID": 2,
+      "name": "Buchacz",
+      "price": "3.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/buchacz.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 19,
+    "fields": {
+      "chestID": 2,
+      "name": "Chłystek",
+      "price": "0.50",
+      "rarity": "common",
+      "cover": "media/skinCovers/chlystek.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 20,
+    "fields": {
+      "chestID": 2,
+      "name": "Duch",
+      "price": "10.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/duch.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 21,
+    "fields": {
+      "chestID": 2,
+      "name": "Discord Admin",
+      "price": "300.00",
+      "rarity": "legendary",
+      "cover": "media/skinCovers/gruby.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 22,
+    "fields": {
+      "chestID": 2,
+      "name": "Kobieta",
+      "price": "100.00",
+      "rarity": "legendary",
+      "cover": "media/skinCovers/kobieta.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 23,
+    "fields": {
+      "chestID": 2,
+      "name": "Mózg operacyjny",
+      "price": "20.00",
+      "rarity": "rare",
+      "cover": "media/skinCovers/mozgoperacyjny.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 24,
+    "fields": {
+      "chestID": 2,
+      "name": "Nauczyciel",
+      "price": "5.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/nauczyciel.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 25,
+    "fields": {
+      "chestID": 2,
+      "name": "Strzelec",
+      "price": "10.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/strzelec.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 26,
+    "fields": {
+      "chestID": 2,
+      "name": "TANK",
+      "price": "100.00",
+      "rarity": "epic",
+      "cover": "media/skinCovers/tank.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 27,
+    "fields": {
+      "chestID": 2,
+      "name": "Technik Informatyk",
+      "price": "2.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/technik_informatyk.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 28,
+    "fields": {
+      "chestID": 2,
+      "name": "Technik programista",
+      "price": "5.00",
+      "rarity": "common",
+      "cover": "media/skinCovers/technik_programista2.png"
+    }
+  },
+  {
+    "model": "app.skin",
+    "pk": 29,
+    "fields": {
+      "chestID": 2,
+      "name": "Wojownik",
+      "price": "10.00",
+      "rarity": "rare",
+      "cover": "media/skinCovers/wojownik.png"
+    }
+  }
+]
