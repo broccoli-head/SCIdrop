@@ -5,8 +5,8 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('login/', views.userLogin, name='login'),
+    path('login/', views.loginAPI),
     path('register/', views.userRegister, name='register'),
     path('logout/', views.userLogout, name='logout'),
-    path('api/chest/<int:chestID>/', views.chestAPI, name='chestAPI')
+    path('chest/<int:chestID>/', views.chestAPI)
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
