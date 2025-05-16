@@ -70,3 +70,20 @@ button:hover {
     justify-content: center;
     align-items: center;
 }
+
+.common {
+    color: rgb(72, 255, 124);
+    text-shadow: 0 0 8px rgb(72, 255, 124);
+}
+.rare {
+    color: rgb(91, 146, 255);
+    text-shadow: 0 0 8px rgb(39, 61, 190);
+}
+.epic {
+    color: rgb(198, 119, 255);
+    text-shadow: 0 0 8px rgb(117, 35, 175);
+}
+.legendary {
+    color: rgb(255, 138, 49);
+    text-shadow: 0 0 8px rgb(252, 105, 42);
+}

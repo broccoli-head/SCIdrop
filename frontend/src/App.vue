@@ -13,7 +13,7 @@
 		<button>Login</button>
 	</router-link>
 
-	<router-link to="/register/">
+	<router-link to="/register">
 		<button>Sign up</button>
 	</router-link>
 </nav>
@@ -24,5 +24,5 @@
 </template>
 
 <style>
-	@import "@/assets/styles/base.css";
+	@import "@/assets/globalStyles/base.css";
 </style>

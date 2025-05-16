@@ -1,5 +1,10 @@
+<script setup>
+    import styles from './styles/roulette.module.css'
+</script>
+
+
 <template>
-<div class="item-list">
+<div class="item-list" :class="styles.title">
     <div v-for="item in items" :key="item.id" class="item">
         <h2>{{ item.name }}</h2>
         <img :src="item.cover" alt="item image" class="item-image" />
@@ -9,19 +14,22 @@
 </div>
 </template>
 
-<script setup>
-    import { ref, onMounted } from 'vue'
-    import axios from 'axios'
-
-    const items = ref([])
-    
-    onMounted(async () => {
-        try {
-            const response = await axios.get('http://localhost:8000/api/chest/1')
-            items.value = response.data.skins
-            console.log(items.value)
-        } catch (error) {
-            console.error('Failed to load data:', error)
+<script>
+export default {
+    data() {
+        return {
+            skins: []
         }
-    })
+    },
+    async created() {
+        const chestID = this.$route.params.id;
+        try {
+            const response = await fetch('http://localhost:8000/api/skins/${chestID}/');
+            const data = await response.json();
+            this.skins = data;
+        } catch (err) {
+            console.error('Failed to fetch skins:', err);
+        }
+    }
+}
 </script>

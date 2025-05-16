@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/components/Home.vue'
 import Login from '@/components/Login.vue'
+import Roulette from '@/components/Roulette.vue'
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: '/login',
     component: Login,
     meta: { title: 'Log in to SCIdrop' }
+  },
+  {
+    path: '/chest/:id',
+    component: Roulette,
+    meta: { title: 'SCIdrop - open the chest' }
   }
 ]
 

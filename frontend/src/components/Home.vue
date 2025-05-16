@@ -1,22 +1,31 @@
 <template>
-<div id="chestList">
-    <div v-for="chest in chests" :key="chest.id">
-    <a class="chestBox" href="chest/{{ chest.id }}">
-        <h2>{{ chest.name }}</h2>
-        <img :src="chest.cover ? chest.cover : '@/assets/icons/chest.svg'" />
+<div :class="styles.body">
+    <div v-if="chests.length == 0">
+        <h1>Currently, there are no chests to buy.</h1>
+    </div>
 
-        <p class="rarity {{ chest.rarity }}">{{ chest.rarity }}</p>
-        <p class="price">{{ chest.price }} ZŁ</p> 
-    </a>
+    <div v-else id="chestList">
+        <div v-for="chest in chests" :key="chest.id">
+            <router-link class="chestBox" :to="`/chest/${chest.id}`">
+                <h2>{{ chest.name }}</h2>
+                <img :src="chest.cover ? chest.cover : '@/assets/icons/chest.svg'" />
+
+                <p class="rarity" :class="chest.rarity">{{ chest.rarity }}</p>
+                <p class="price">{{ chest.price }} ZŁ</p> 
+            </router-link>
+        </div>
     </div>
 </div>
 </template>
 
 <script>
+import styles from '@/components/styles/home.module.css'
+
 export default {
     data() {
         return {
-            chests: []
+            chests: [],
+            styles
         }
     },
     async created() {
@@ -30,7 +39,3 @@ export default {
     }
 }
 </script>
-
-<style>
-    @import "@/assets/styles/home.css";
-</style>
