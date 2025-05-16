@@ -5,19 +5,25 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .models import Chest
+from .models import Chest, Skin
 from .serializers import ChestSerializer
 
 
-def home(request):
-    chests = Chest.objects.order_by('-id')[:10]
-    context = {
-        'chests': chests
-    }
-    return render(request, 'app/home.html', context)
+@api_view(['GET'])
+def getChests(request):
+    chests = Chest.objects.all()
+    serializer = ChestSerializer(chests, many = True, context = {'request': request})
+    return Response(serializer.data)
 
 
-def userRegister(request):
+@api_view(['GET'])
+def getSkins(request, chest_ID):
+    skins = Skin.objects.filter(chestID = chest_ID)
+    serializer = ChestSerializer(skins, many = True, context = {'request': request})
+    return Response(serializer.data)
+
+
+def registerAPI(request):
 
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -68,17 +74,6 @@ def loginAPI(request):
     # return render(request, 'app/login.html', context)
 
 
-def userLogout(request):
+def logoutAPI(request):
     logout(request)
     return redirect('/')
-
-
-@api_view(['GET'])
-def chestAPI(request, chestID):
-    try:
-        chest = Chest.objects.get(id = chestID)
-    except Chest.DoesNotExist:
-        return Response({'error': 'Chest not found'}, status = 404)
-
-    serializer = ChestSerializer(chest, context =  {'request': request})
-    return Response(serializer.data)

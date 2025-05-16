@@ -6,16 +6,25 @@ Simple website made with Django and Vue frameworks. It implements opening chests
 ```
 > pip install -r requirements.txt
 ```
+<b>Install frontend dependencies</b>
+```
+> npm install frontend
+```
 
 <b>Start instructions</b>
 ```
+> python manage.py makemigrations backend
+
+or (if above not works):
 > python manage.py makemigrations
+
+then:
 > python manage.py migrate
 ```
 
 <b>If you want to start with example 2 chests, type:</b>
 ```
-> python manage.py loaddata app/fixtures/example_chests.json
+> python manage.py loaddata example_chests.json
 ```
 and unzip ```media.zip``` file into media folder
 
@@ -25,7 +34,7 @@ and unzip ```media.zip``` file into media folder
 > npm run dev
 ```
 
-And go to ```localhost:8000```
+And go to ```localhost:5173```
 
 
 # 💻 Used technologies
