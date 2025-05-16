@@ -65,7 +65,7 @@ def userLogout(request):
 
 
 @api_view(['GET'])
-def chestOpening(request, chestID):
+def chestAPI(request, chestID):
     try:
         chest = Chest.objects.get(id = chestID)
     except Chest.DoesNotExist:

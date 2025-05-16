@@ -8,5 +8,5 @@ urlpatterns = [
     path('login/', views.userLogin, name='login'),
     path('register/', views.userRegister, name='register'),
     path('logout/', views.userLogout, name='logout'),
-    path('api/chest/<int:chestID>/', views.chestOpening, name='chest_api')
+    path('api/chest/<int:chestID>/', views.chestAPI, name='chestAPI')
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

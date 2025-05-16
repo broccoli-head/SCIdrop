@@ -1,6 +1,8 @@
 # django
+venv/
 __pycache__/
 migrations/
+media/
 db.sqlite3
 
 # vue folders
