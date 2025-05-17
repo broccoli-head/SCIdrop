@@ -22,10 +22,13 @@
 
 export default {
     data() {
-        return { chests: [] }
+        return {
+            chests: []
+        }
     },
     async created() {
         try {
+            //gets chests from the backend
             const response = await fetch('http://localhost:8000/api/chests/');
             const data = await response.json();
             this.chests = data;

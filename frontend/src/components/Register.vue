@@ -59,6 +59,7 @@ export default {
         async handleRegister() {
             this.loading = true;
 
+            //checks if user is over 18 and accepted terms
             if (!this.over18) {
                 this.errorMessage = 'You have to be above 18 years old!';
                 this.loading = false;
@@ -71,21 +72,26 @@ export default {
             }
    
             try {
+                //sends register request to the server
                 await axios.post('http://localhost:8000/api/register/', {
                     username: this.username,
                     email: this.email,
                     password: this.password,
                 }, {
+                    //needed for django csrf protecion
                     withCredentials: true
                 });
-
+                
+                //gets user info (username)
                 const userResponse = await axios.get('http://localhost:8000/api/userInfo/', {
                     withCredentials: true
                 });
 
+                //if user is logged in, sets in the session their username
                 if(userResponse.data.username) {
                     localStorage.setItem('isLoggedIn', 'true');
                     localStorage.setItem('username', this.username);
+                    //redirects user to the home page
                     this.$router.push('/');
                 }
                 else {

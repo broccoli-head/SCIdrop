@@ -50,20 +50,25 @@ export default {
             this.loading = true;
 
             try {
+                //sends login request to the server
                 await axios.post('http://localhost:8000/api/login/', {
                     username: this.username,
                     password: this.password,
                 }, {
+                    //needed for django csrf protecion
                     withCredentials: true
                 });
 
+                //gets user info (username)
                 const userResponse = await axios.get('http://localhost:8000/api/userInfo/', {
                     withCredentials: true
                 });
 
+                //if user is logged in, sets in the session their username
                 if(userResponse.data.username) {
                     localStorage.setItem('isLoggedIn', 'true');
                     localStorage.setItem('username', this.username);
+                    //redirects user to the home page
                     this.$router.push('/');
                 }
                 else {

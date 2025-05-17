@@ -47,13 +47,14 @@ export default {
 		this.checkLogin();
 	},
     methods: {
+		//checks login status and returns username
 		checkLogin() {
 			this.isLoggedIn = localStorage.getItem('isLoggedIn')  == 'true';
 			this.username = localStorage.getItem('username') || '';
 		},
         async handleLogout() {
             try {
-				//gets csrf token
+				//gets csrf token required in login and register forms
 				const csrfResponse = await axios.get(
 					'http://localhost:8000/api/getCSRF/',
 					{ withCredentials: true }
@@ -76,6 +77,7 @@ export default {
 				localStorage.removeItem('username');
 				this.isLoggedIn = false;
 				this.username = '';
+				//redirects user to login page
                 this.$router.push('/login');	
             }
 			catch (error) {
@@ -84,6 +86,7 @@ export default {
         }
     },
 	watch: {
+		//checks if user is still logged in even while changing pages
 		'$route'() {
 			this.checkLogin();
 		}

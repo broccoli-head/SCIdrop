@@ -39,7 +39,7 @@ const routes = [
 	path: '/chest/:id',
 	component: Roulette,
 	meta: {
-		title: 'SCIdrop - open the chest',
+		title: 'SCIdrop - Chest opening',
 		background: rouletteBg
 	}
 }
@@ -51,8 +51,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+	//changes website title per page
 	document.title = to.meta.title || 'SCIdrop'
 
+	//changes body background per page
 	const background = to.meta.background
 	if (background) {
 		document.body.style.backgroundImage = `url('${background}')`

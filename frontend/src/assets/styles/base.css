@@ -9,6 +9,13 @@ body {
     scroll-behavior: smooth;
 }
 
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+
 .logo {
     display: flex;
     gap: 8px;

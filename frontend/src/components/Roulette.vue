@@ -1,12 +1,13 @@
 <template>
-<div class="item-list">
-    <div v-for="item in items" :key="item.id" class="item">
-        <h2>{{ item.name }}</h2>
-        <img :src="item.cover" alt="item image" class="item-image" />
-        <p>{{ item.rarity }}</p>
-        <p>{{ item.price }}</p>
+<div id="skinList">
+    <div v-for="skin in skins" :key="skin.id" class="skinBox">
+        <h2>{{ skin.name }}</h2>
+        <img :src="skin.cover" />
+        <p class="rarity" :class="skin.rarity">{{ skin.rarity }}</p>
+        <p class="price">{{ skin.price }} ZŁ</p>
     </div>
 </div>
+<button id="spin">Spin</button>
 </template>
 
 <script>
@@ -19,11 +20,22 @@ export default {
     async created() {
         const chestID = this.$route.params.id;
         try {
-            const response = await fetch('http://localhost:8000/api/skins/${chestID}/');
+            const response = await fetch(`http://localhost:8000/api/skins/${chestID}/`);
             const data = await response.json();
-            this.skins = data;
+            this.skins = this.shuffleArray(data);
         } catch (err) {
             console.error('Failed to fetch skins:', err);
+        }
+    },
+    methods: {
+        shuffleArray(array) {
+            for(let i = array.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                let temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            return array;
         }
     }
 }

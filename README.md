@@ -1,3 +1,8 @@
+# ❗ PROJECT IS NOT FINISHED YET!
+To-do list:
+- [ ] user balance
+- [ ] roulette logic
+
 # 🎁 About SCIdrop
 Simple website made with Django and Vue frameworks. It implements opening chests with customisable skins. Everything works on the user's account balance based on the real currency.
 
