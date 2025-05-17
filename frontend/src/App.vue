@@ -9,15 +9,22 @@
 		</h1>
 	</div>
 
-	<router-link to="/login">
-		<button>Log in</button>
-	</router-link>
+    <p v-if="isLoggedIn">Logged as {{ username }}</p>
+	
+	<template v-if="!isLoggedIn">
+		<router-link to="/login">
+			<button>Log in</button>
+		</router-link>
 
-	<router-link to="/register">
-		<button>Sign up</button>
-	</router-link>
+		<router-link to="/register">
+			<button>Sign up</button>
+		</router-link>
+	</template>
 
-	<button @click="handleLogout">Log out</button>
+	<template v-else>
+		<button @click="handleLogout">Log out</button>
+	</template>
+	
 </nav>
 
 <main>
@@ -30,16 +37,50 @@ import axios from 'axios';
 
 export default {
     name: 'App',
+	data()  {
+		return {
+			isLoggedIn: false,
+			username: ''
+		};
+	},
+	mounted() {
+		this.checkLogin();
+	},
     methods: {
+		checkLogin() {
+			this.isLoggedIn = localStorage.getItem('isLoggedIn')  == 'true';
+			this.username = localStorage.getItem('username') || '';
+		},
         async handleLogout() {
             try {
-                await axios.post('http://localhost:8000/api/logout/');
-                this.$router.push('/login');
-            } catch (error) {
+				//gets csrf token
+				const csrfResponse = axios.get(
+					'http://localhost:8000/api/getCSRF/', { withCredentials: true }
+				);
+				axios.defaults.headers.common['X-CSRFToken'] = csrfResponse.data.CSRFToken;
+
+				//logout request
+                await axios.post(
+					'http://localhost:8000/api/logout/', {}, { withCredentials: true }
+				);
+				
+				//delete user from session
+				localStorage.removeItem('isLoggedIn');
+				localStorage.removeItem('username');
+				this.isLoggedIn = false;
+				this.username = '';
+                this.$router.push('/login');	
+            }
+			catch (error) {
                 console.error('Logout failed: ', error);
             }
         }
-    }
+    },
+	watch: {
+		'$route'() {
+			this.checkLogin();
+		}
+	}
 }
 </script>
 

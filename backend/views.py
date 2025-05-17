@@ -1,5 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.middleware.csrf import get_token
+from django.views.decorators.csrf import csrf_protect
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -20,6 +22,11 @@ def getSkins(request, chest_ID):
     skins = Skin.objects.filter(chestID = chest_ID)
     serializer = ChestSerializer(skins, many = True, context = {'request': request})
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getCSRFToken(request):
+    return Response({'CSRFToken': get_token(request)})
 
 
 @api_view(['POST'])
@@ -59,6 +66,7 @@ def loginAPI(request):
         return Response({'message': 'Invalid login or password'}, status = 400)
 
 
+@csrf_protect
 @api_view(['POST'])
 def logoutAPI(request):
     logout(request)
