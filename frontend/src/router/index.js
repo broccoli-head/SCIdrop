@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '@/components/Home.vue'
 import Login from '@/components/Login.vue'
+import Register from '@/components/Register.vue'
 import Roulette from '@/components/Roulette.vue'
 
 import homeBg from '@/assets/images/home_background.png'
@@ -23,6 +24,14 @@ const routes = [
 	component: Login,
 	meta: {
 		title: 'Log in to SCIdrop',
+		background: loginBg
+	}
+},
+{
+	path: '/register',
+	component: Register,
+	meta: {
+		title: 'Sign up for SCIdrop',
 		background: loginBg
 	}
 },

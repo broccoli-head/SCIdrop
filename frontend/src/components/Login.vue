@@ -1,20 +1,21 @@
 <template>
 <div class="centeredBox">
     <h1 class="boldTitle orange">LOGIN</h1>
-    <form class="login" @submit.prevent="handleLogin">
-        <div class="field">
-            <label for="username">Username:</label>
-            <input v-model="username" type="text" autocomplete="username" required/>
-        </div>
+    <form @submit.prevent="handleLogin">
+        <div id="loginForm">
+            <div class="field">
+                <label for="username">Username:</label>
+                <input v-model="username" type="text" autocomplete="username" required/>
+            </div>
 
-        <div class="field">
-            <label for="password">Password:</label>
-            <input v-model="password" type="password" autocomplete="current-password" required/>
+            <div class="field">
+                <label for="password">Password:</label>
+                <input v-model="password" type="password" autocomplete="current-password" required/>
+            </div>
         </div>
-
-        <div class="rememberMe">
-            <input type="checkbox" name="rememberMe" checked>
-            <label>Remember me</label><br>
+        <div class="check">
+            <input id="rememberMe" type="checkbox" name="rememberMe" checked>
+            <label for="rememberMe">Remember me</label><br>
         </div>
         
         <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
@@ -24,7 +25,7 @@
         </button>
 
         <p>Don't have an account?<br>
-            <router-link :to="/register/">Register here</router-link>
+            <router-link to="/register">Register here</router-link>
         </p>
     </form>
 </div>
@@ -49,20 +50,32 @@ export default {
             this.loading = true;
 
             try {
-                const response = await axios.post('http://localhost:8000/api/login/', {
+                await axios.post('http://localhost:8000/api/login/', {
                     username: this.username,
                     password: this.password,
+                }, {
+                    withCredentials: true
                 });
 
-                const token = response.data.token;
-                localStorage.setItem('authToken', token);
-                this.$router.push('/');
+                const userResponse = await axios.get('http://localhost:8000/api/userInfo/', {
+                    withCredentials: true
+                });
+
+                if(userResponse.data.username) {
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('username', this.username);
+                    this.$router.push('/');
+                }
+                else {
+                    this.errorMessage = "Login failed.";
+                }
 
             } catch (error) {
-                if (error.response && error.response.data) {
-                    this.errorMessage = error.response.data.detail || 'Login failed.';
-                } else {
-                    this.errorMessage = 'Network or server error.';
+                if (error.response.data) {
+                    this.errorMessage = error.response.data.message || 'Login failed.';
+                }
+                else {
+                    this.errorMessage = 'Connection error occured.';
                 }
             } finally {
                 this.loading = false;

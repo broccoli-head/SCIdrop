@@ -1,6 +1,5 @@
-from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -23,22 +22,28 @@ def getSkins(request, chest_ID):
     return Response(serializer.data)
 
 
+@api_view(['POST'])
 def registerAPI(request):
+    username = request.data.get('username')
+    email = request.data.get('email')
+    password = request.data.get('password')
 
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('/')
+    if not username:
+        return Response({'message': 'Username field is required!'}, status = 400)
+    elif not email:
+        return Response({'message': 'E-mail field is required!'}, status = 400)
+    elif not password:
+        return Response({'message': 'Password field is required!'}, status = 400)
+    
+    elif User.objects.filter(username = username).exists():
+        return Response({'message': 'User with that name already exists!'}, status = 400)
+    elif User.objects.filter(email = email).exists():
+        return Response({'message': 'User with that e-mail already exists!'}, status = 400)
+    
     else:
-        form = UserCreationForm()
-
-    context = {
-        'form': form
-    }
-
-    return render(request, 'app/register.html', context)
+        user = User.objects.create_user(username = username, email = email, password = password)
+        login(request, user)
+        return Response()
 
 
 @api_view(['POST'])
@@ -49,31 +54,20 @@ def loginAPI(request):
 
     if user is not None:
         login(request, user)
-        return Response({'message': 'Logged in successfully', 'username': user.username})
+        return Response()
     else:
-        return Response({'error': 'Invalid credentials'}, status=400)
-
-    # if request.method == 'POST':
-    #     form = AuthenticationForm(data = request.POST)
-    #     if form.is_valid():
-    #         user = form.get_user()
-    #         login(request, user)
-            
-    #         if not request.POST.get('rememberMe'):
-    #             request.session.set_expiry(0)
-    #         else:
-    #             request.session.set_expiry(999999999)
-    #         return redirect('/')
-    # else:
-    #     form = AuthenticationForm()
-    
-    # context = {
-    #     'form': form
-    # }
-
-    # return render(request, 'app/login.html', context)
+        return Response({'message': 'Invalid login or password'}, status = 400)
 
 
+@api_view(['POST'])
 def logoutAPI(request):
     logout(request)
-    return redirect('/')
+    return Response()
+
+
+@api_view(['GET'])
+def userInfo(request):
+    if request.user.is_authenticated:
+        return Response({'username': request.user.username})
+    else:
+        return Response({'message': 'Not logged'}, status = 401)

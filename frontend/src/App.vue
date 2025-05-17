@@ -10,18 +10,38 @@
 	</div>
 
 	<router-link to="/login">
-		<button>Login</button>
+		<button>Log in</button>
 	</router-link>
 
 	<router-link to="/register">
 		<button>Sign up</button>
 	</router-link>
+
+	<button @click="handleLogout">Log out</button>
 </nav>
 
 <main>
     <router-view />
 </main>
 </template>
+
+<script>
+import axios from 'axios';
+
+export default {
+    name: 'App',
+    methods: {
+        async handleLogout() {
+            try {
+                await axios.post('http://localhost:8000/api/logout/');
+                this.$router.push('/login');
+            } catch (error) {
+                console.error('Logout failed: ', error);
+            }
+        }
+    }
+}
+</script>
 
 <style>
 	@import "@/assets/styles/base.css";
