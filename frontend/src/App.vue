@@ -9,7 +9,7 @@
 		</h1>
 	</div>
 
-    <p v-if="isLoggedIn">Logged as {{ username }}</p>
+    <p v-if="isLoggedIn">Logged as <span class="orange">{{ username }}</span></p>
 	
 	<template v-if="!isLoggedIn">
 		<router-link to="/login">
@@ -54,14 +54,21 @@ export default {
         async handleLogout() {
             try {
 				//gets csrf token
-				const csrfResponse = axios.get(
-					'http://localhost:8000/api/getCSRF/', { withCredentials: true }
+				const csrfResponse = await axios.get(
+					'http://localhost:8000/api/getCSRF/',
+					{ withCredentials: true }
 				);
-				axios.defaults.headers.common['X-CSRFToken'] = csrfResponse.data.CSRFToken;
 
 				//logout request
                 await axios.post(
-					'http://localhost:8000/api/logout/', {}, { withCredentials: true }
+					'http://localhost:8000/api/logout/',
+					{ },
+					{
+						withCredentials: true,
+						headers: {
+							'X-CSRFToken': csrfResponse.data.CSRFToken
+						}
+					}
 				);
 				
 				//delete user from session

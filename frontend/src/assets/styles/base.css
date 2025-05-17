@@ -40,10 +40,17 @@ nav {
     display: flex;
     align-items: center;
     width: 100vw;
-    gap: 15px;
+    gap: 30px;
     backdrop-filter: blur(5px);
     background-color: rgba(106, 87, 69, 0.4);
     border-bottom: solid 3px rgba(116, 116, 116, 0.4);
+}
+
+nav p {
+    font-weight: bold;
+    font-size: 1.2em;
+    border-left: solid 2px white;
+    padding-left: 15px;
 }
 
 a {
@@ -70,6 +77,10 @@ button:disabled {
 }
 button:disabled:hover {
     background-color: #d07373;
+}
+
+nav button {
+    margin: 0;
 }
 
 .warning {

@@ -71,14 +71,26 @@ export default {
             }
    
             try {
-                const response = await axios.post('http://localhost:8000/api/register/', {
+                await axios.post('http://localhost:8000/api/register/', {
                     username: this.username,
                     email: this.email,
                     password: this.password,
+                }, {
+                    withCredentials: true
                 });
 
-                localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('username', this.username);
+                const userResponse = await axios.get('http://localhost:8000/api/userInfo/', {
+                    withCredentials: true
+                });
+
+                if(userResponse.data.username) {
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('username', this.username);
+                    this.$router.push('/');
+                }
+                else {
+                    this.errorMessage = "Sign up failed.";
+                }
 
             } catch (error) {
                 if (error.response && error.response.data) {
