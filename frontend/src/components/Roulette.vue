@@ -1,10 +1,5 @@
-<script setup>
-    import styles from './styles/roulette.module.css'
-</script>
-
-
 <template>
-<div class="item-list" :class="styles.title">
+<div class="item-list">
     <div v-for="item in items" :key="item.id" class="item">
         <h2>{{ item.name }}</h2>
         <img :src="item.cover" alt="item image" class="item-image" />
@@ -33,3 +28,7 @@ export default {
     }
 }
 </script>
+
+<style>
+    @import '@/assets/styles/roulette.css';
+</style>

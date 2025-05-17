@@ -1,34 +1,31 @@
 <template>
-<div class="login-container">
-    <h2>Login</h2>
-    <form @submit.prevent="handleLogin">
-    <div>
-        <label for="username">Username:</label>
-        <input
-            id="username"
-            v-model="username"
-            type="text"
-            required
-            autocomplete="username"
-        />
-    </div>
+<div class="centeredBox">
+    <h1 class="boldTitle orange">LOGIN</h1>
+    <form class="login" @submit.prevent="handleLogin">
+        <div class="field">
+            <label for="username">Username:</label>
+            <input v-model="username" type="text" autocomplete="username" required/>
+        </div>
 
-    <div>
-        <label for="password">Password:</label>
-        <input
-            id="password"
-            v-model="password"
-            type="password"
-            required
-            autocomplete="current-password"
-        />
-    </div>
+        <div class="field">
+            <label for="password">Password:</label>
+            <input v-model="password" type="password" autocomplete="current-password" required/>
+        </div>
 
-    <button type="submit" :disabled="loading">
-        {{ loading ? 'Logging in...' : 'Login' }}
-    </button>
+        <div class="rememberMe">
+            <input type="checkbox" name="rememberMe" checked>
+            <label>Remember me</label><br>
+        </div>
+        
+        <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
+        
+        <button type="submit" :disabled="loading">
+            {{ loading ? 'Logging in...' : 'Log in' }}
+        </button>
 
-    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
+        <p>Don't have an account?<br>
+            <router-link :to="/register/">Register here</router-link>
+        </p>
     </form>
 </div>
 </template>
@@ -75,15 +72,6 @@ export default {
 };
 </script>
 
-<style scoped>
-.login-container {
-  max-width: 400px;
-  margin: auto;
-  padding: 1rem;
-}
-
-.error {
-  color: red;
-  margin-top: 1rem;
-}
+<style>
+    @import '@/assets/styles/form.css';
 </style>

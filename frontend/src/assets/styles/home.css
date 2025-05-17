@@ -1,7 +1,3 @@
-body {
-    background-image: url(../images/page_background.png);
-    background-size: cover;
-}
 nav  {
     background-color: rgba(69, 56, 44, 0.8);
 }
@@ -61,7 +57,7 @@ nav  {
     width: 200px
 }
 
-.rarity {
+.chestBox .rarity {
     font-size: 1.7em;
     font-family: "Arial Black";
     text-transform: uppercase;

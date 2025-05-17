@@ -1,5 +1,5 @@
 <template>
-<div :class="styles.body">
+<div>
     <div v-if="chests.length == 0">
         <h1>Currently, there are no chests to buy.</h1>
     </div>
@@ -19,14 +19,10 @@
 </template>
 
 <script>
-import styles from '@/components/styles/home.module.css'
 
 export default {
     data() {
-        return {
-            chests: [],
-            styles
-        }
+        return { chests: [] }
     },
     async created() {
         try {
@@ -39,3 +35,7 @@ export default {
     }
 }
 </script>
+
+<style>
+    @import '@/assets/styles/home.css';
+</style>
