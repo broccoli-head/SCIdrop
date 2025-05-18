@@ -1,12 +1,14 @@
 # ❗ PROJECT IS NOT FINISHED YET!
 ### To-do list:
-- [x] displaying skins depending on chest ID
-- [ ] user balance (adding and removing money from the account)
-- [ ] roulette logic (scrolling vertically and chosing one element)
+- [ ] add user balance (adding and removing money from the account)
+- [ ] can open chests only if user is logged in
+- [ ] repair roulette scrolling that depends now on the chest
 
 # 🎁 About SCIdrop
 Simple website made with Django and Vue frameworks. It implements opening chests with customisable skins. Everything works on the user's account balance based on the real currency.
 
+
+### Here you can watch [app preview video](https://youtu.be/OsMqisXqZE0)
 # ⚙️ Setup guide:
 ### The best way to start is to open two different terminals - one for backend commands, and another one for frontend
 
