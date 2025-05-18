@@ -2,14 +2,19 @@ main {
     flex-direction: column;
 }
 
-#skinList {
+#skinsOverlay {
     width: 90vw;
-    display: flex;
-    overflow-x: hidden;
     border: solid 3px white;
     box-shadow: 0 0 15px white;
     border-radius: 20px;
     padding: 10px;
+    overflow-x: hidden;
+}
+
+#skinList {
+    display: flex;
+    transform: translateX(-50%);
+    transition: 8s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .skinBox {
@@ -56,4 +61,10 @@ main {
     font-size: 2em;
     border: 5px solid white;
     box-shadow: 0 0 10px white;
+}
+
+.triangle {
+    width: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
