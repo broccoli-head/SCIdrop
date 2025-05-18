@@ -1,53 +1,67 @@
 # ❗ PROJECT IS NOT FINISHED YET!
-To-do list:
-- [ ] user balance
-- [ ] roulette logic
+### To-do list:
+- [x] displaying skins depending on chest ID
+- [ ] user balance (adding and removing money from the account)
+- [ ] roulette logic (scrolling vertically and chosing one element)
 
 # 🎁 About SCIdrop
 Simple website made with Django and Vue frameworks. It implements opening chests with customisable skins. Everything works on the user's account balance based on the real currency.
 
-# ⚙️ Setup guide
-<b>Install necessary libraries (Pillow, Django)</b>
+# ⚙️ Setup guide:
+### The best way to start is to open two different terminals - one for backend commands, and another one for frontend
+
+### 🔧 Backend:
+<b>1. Install necessary libraries (Pillow, Django):</b>
 ```
 > pip install -r requirements.txt
 ```
-<b>Install frontend dependencies</b>
-```
-> npm install frontend
-```
 
-<b>Start instructions</b>
+<b>2. Migrate to create database:</b>
 ```
 > python manage.py makemigrations backend
-
-or (if above not works):
+```
+or (if above returned anything):
+```
 > python manage.py makemigrations
-
+```
 then:
+```
 > python manage.py migrate
 ```
 
-<b>If you want to start with example 2 chests, type:</b>
+<b>3. If you want to start with the example 2 chests, type:</b>
 ```
 > python manage.py loaddata example_chests.json
 ```
-and unzip ```media.zip``` file into media folder
+and unzip ```media.zip``` file in to the media folder. Hierarchy should look like this:
+<br>
+```SCIdrop/media/chestCovers``` and ```SCIdrop/media/skinCovers```
 
-<b>To run frontend and backend, type this in different terminals:</b>
+<b> 4. To run backend API:</b>
 ```
 > python manage.py runserver
+```
+
+### 🖼️ Frontend:
+<b>1. Install all dependencies</b>
+```
+> cd frontend
+> npm install
+```
+<b>2. To run frontend:</b>
+```
 > npm run dev
 ```
 
-And go to ```localhost:5173```
+### To start, go in the browser to <b>```localhost:5173```</b>
 
 
 # 💻 Used technologies
-<b>🖼️ Frontend:</b>
+<b>Frontend:</b>
 - HTML
 - CSS
-- JavaScript with Vue
+- JavaScript (with Vue, Vite and Axios)
 
-<b>🔧 Backend:</b>
-- Python with Django
-- SQLite
+<b>Backend:</b>
+- Python (with Django  and Pillow)
+- SQLite3
