@@ -2,8 +2,8 @@ main {
     flex-direction: column;
 }
 
-#skinsOverlay {
-    width: 90vw;
+#listOverlay {
+    width: 1200px;
     border: solid 3px white;
     box-shadow: 0 0 15px white;
     border-radius: 20px;
@@ -14,6 +14,7 @@ main {
 #skinList {
     display: flex;
     transform: translateX(-50%);
+    will-change: contents;
     transition: 8s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
@@ -45,7 +46,7 @@ main {
     margin-bottom: 10px;
 }
 
-.skinBox .rarity {
+.skinBox .rarity, .window .rarity {
     font-size: 1em;
     margin: 0;
     font-family: "Arial Black";
@@ -60,6 +61,7 @@ main {
     margin-top: 20px;
     font-size: 2em;
     border: 5px solid white;
+    color: #5e3f0d;
     box-shadow: 0 0 10px white;
 }
 
@@ -67,4 +69,30 @@ main {
     width: 40px;
     margin-top: 10px;
     margin-bottom: 10px;
+    filter: drop-shadow(0 0 10px white);
+}
+
+.index {
+    display: none;
+}
+
+.window {
+    height: 500px;
+    width: 350px;
+    display: none;
+    position: absolute;
+    background-color: rgba(61, 44, 20, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    border: solid 2px white;
+    box-shadow: 0 0 10px white;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.window img {
+    height: 200px;
 }

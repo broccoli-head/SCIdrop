@@ -1,16 +1,28 @@
 <template>
     <img class="triangle" src="@/assets/icons/triangle.svg" />
-    <div id="skinsOverlay">
+    <div id="listOverlay" ref="listOverlay">
         <div id="skinList" ref="skinList">
-            <div v-for="skin in skins" :key="skin.id"class="skinBox">
+            <div v-for="(skin, index) in skins" :key="index" class="skinBox">
                 <h2>{{ skin.name }}</h2>
                 <img :src="skin.cover" />
                 <p class="rarity" :class="skin.rarity">{{ skin.rarity }}</p>
                 <p class="price">{{ skin.price }} ZŁ</p>
+                <p class="index" ref="skinIndex">{{ index }}</p>
             </div>
         </div>
     </div>
-    <button id="spin" @click="spin">Spin</button>
+    <button id="spin" ref="spinButton" @click="spin">Spin</button>
+
+    <div class="window" ref="window">
+        <h1>You won:</h1>
+        <h2>{{ selected.name }}</h2>
+        <img :src="selected.cover" />
+        <p class="rarity" :class="selected.rarity">{{ selected.rarity }}</p>
+        <p class="price">{{ selected.price }} ZŁ</p>
+        <router-link to="/">
+            <button>CLAIM</button>
+        </router-link>
+    </div>
 </template>
 
 <script>
@@ -18,7 +30,7 @@ export default {
     data() {
         return {
             skins: [],
-            isSpinning: false
+            selected: []
         }
     },
     async created() {
@@ -48,9 +60,37 @@ export default {
             return array;
         },
         spin() {
+            const chestID = this.$route.params.id;
+            const skinCount = this.skins.length;
             const skinList = this.$refs.skinList;
+            const container = this.$refs.skinList;
+            const window = this.$refs.window;
+
+            const boxWidth = 140;   //width of the skin box
+
+            const button = this.$refs.spinButton;
+            button.disabled = true;
+
+            //gets the middle element
+            const skinIndex = Math.floor(skinCount / 2);
+            this.selected = this.skins[skinIndex];
+
             //spins list from right to left
-            skinList.style.transform = "translateX(-2000%)";
+            //checking chest id is temporary until i will find issue of finding middle element
+            let scrollTarget = 0;
+            if (chestID == 1) {
+                scrollTarget = skinIndex * boxWidth + container.clientWidth;
+            }
+            else {
+                scrollTarget = skinIndex * boxWidth + (container.clientWidth / 2) + (boxWidth / 2);
+            }
+        
+            skinList.style.transform = `translateX(-${scrollTarget}px)`;
+            
+            //after 8s shows the window with won skin
+            setTimeout(() => {
+                window.style.display = 'flex';
+            }, 8000);
         }
     }
 }
