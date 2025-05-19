@@ -40,8 +40,12 @@ export default {
             const data = await response.json();
             
             const shuffled = this.shuffleArray(data);
-            //fills list with 20x current array
-            this.skins = Array(20).fill(shuffled).flat();
+            
+            //fills the list with ca. 400 items
+            while (this.skins.length < 400) {
+                this.skins.push(...shuffled);
+            }
+            this.skins.length = 400;    //cuts to 400 elements
 
         } catch (err) {
             console.error('Failed to fetch skins:', err);
@@ -60,7 +64,6 @@ export default {
             return array;
         },
         spin() {
-            const chestID = this.$route.params.id;
             const skinCount = this.skins.length;
             const skinList = this.$refs.skinList;
             const container = this.$refs.skinList;
@@ -71,20 +74,15 @@ export default {
             const button = this.$refs.spinButton;
             button.disabled = true;
 
-            //gets the middle element
-            const skinIndex = Math.floor(skinCount / 2);
+            //gets the element positioned in the 90% of the list
+            //e.g. index for 400 items: 0.9 * 400 = 360
+            const skinIndex = skinCount - Math.floor(skinCount / 10);
             this.selected = this.skins[skinIndex];
+            console.log(skinIndex);
 
             //spins list from right to left
-            //checking chest id is temporary until i will find issue of finding middle element
             let scrollTarget = 0;
-            if (chestID == 1) {
-                scrollTarget = skinIndex * boxWidth + container.clientWidth;
-            }
-            else {
-                scrollTarget = skinIndex * boxWidth + (container.clientWidth / 2) + (boxWidth / 2);
-            }
-        
+            scrollTarget = skinIndex * boxWidth + (container.clientWidth * 2) + (boxWidth * 4.75);
             skinList.style.transform = `translateX(-${scrollTarget}px)`;
             
             //after 8s shows the window with won skin
