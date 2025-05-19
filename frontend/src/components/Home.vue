@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { refreshBalance } from '@/utils.js';
 
 export default {
     data() {
@@ -26,16 +27,23 @@ export default {
             chests: []
         }
     },
-    async created() {
-        try {
-            //gets chests from the backend
-            const response = await fetch('http://localhost:8000/api/chests/');
-            const data = await response.json();
-            this.chests = data;
-        } catch (err) {
-            console.error('Failed to fetch chests:', err);
+    mounted() {
+        this.loadChests();
+		refreshBalance(this);
+    },
+
+    methods: {
+        async loadChests() {
+            try {
+                //gets chests from the backend
+                const response = await fetch('http://localhost:8000/api/chests/');
+                const data = await response.json();
+                this.chests = data;
+            } catch (err) {
+                console.error('Failed to fetch chests:', err);
+            }
         }
-    }
+    }  
 }
 </script>
 

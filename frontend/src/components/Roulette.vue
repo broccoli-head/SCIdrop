@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import { refreshBalance } from '@/utils.js';
+
 export default {
     data() {
         return {
@@ -33,26 +35,31 @@ export default {
             selected: []
         }
     },
-    async created() {
-        const chestID = this.$route.params.id;
-        try {
-            const response = await fetch(`http://localhost:8000/api/skins/${chestID}/`);
-            const data = await response.json();
-            
-            const shuffled = this.shuffleArray(data);
-            
-            //fills the list with ca. 400 items
-            while (this.skins.length < 400) {
-                this.skins.push(...shuffled);
-            }
-            this.skins.length = 400;    //cuts to 400 elements
-
-        } catch (err) {
-            console.error('Failed to fetch skins:', err);
-        }
+    mounted() {
+        this.loadSkins();
+        refreshBalance(this);
     },
 
     methods: {
+        async loadSkins() {
+            const chestID = this.$route.params.id;
+            try {
+                const response = await fetch(`http://localhost:8000/api/skins/${chestID}/`);
+                const data = await response.json();
+                
+                const shuffled = this.shuffleArray(data);
+                
+                //fills the list with ca. 400 items
+                while (this.skins.length < 400) {
+                    this.skins.push(...shuffled);
+                }
+                this.skins.length = 400;    //cuts to 400 elements
+
+            } catch (err) {
+                console.error('Failed to fetch skins:', err);
+            }
+        },
+
         shuffleArray(array) {
             for(let i = array.length - 1; i > 0; i--) {
                 //randomize order of the array items
@@ -63,6 +70,7 @@ export default {
             }
             return array;
         },
+        
         spin() {
             const skinCount = this.skins.length;
             const skinList = this.$refs.skinList;

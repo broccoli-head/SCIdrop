@@ -1,3 +1,7 @@
+<script setup>
+	import { global } from '@/store.js'
+</script>
+
 <template>
 <nav>
 	<div class="logo">
@@ -21,7 +25,7 @@
 
 	<template v-else>
 		<p>Logged as <span class="orange">{{ username }}</span></p>
-		<p>Your balance: <span class="orange">{{ balance }}</span></p>
+		<p>Your balance: <span class="orange">{{ global.balance }}</span></p>
 		<button @click="handleLogout">Log out</button>
 	</template>
 	
@@ -34,6 +38,7 @@
 
 <script>
 import axios from 'axios';
+import { refreshBalance } from '@/utils.js';
 
 export default {
     name: 'App',
@@ -46,7 +51,7 @@ export default {
 	},
 	mounted() {
 		this.checkLogin();
-		this.refreshBalance();
+		refreshBalance(this);
 	},
 
     methods: {
@@ -54,19 +59,6 @@ export default {
 		checkLogin() {
 			this.isLoggedIn = localStorage.getItem('isLoggedIn')  == 'true';
 			this.username = localStorage.getItem('username') || '';
-		},
-
-		async refreshBalance() {
-			try {
-				//gets balance from the backend
-				const response = await axios.get('http://localhost:8000/api/userInfo/', {
-					withCredentials: true
-				});
-
-				this.balance = response.data.balance + " PLN";
-			} catch (err) {
-				console.error('Failed to fetch user info:', err);
-			}
 		},
 
         async handleLogout() {

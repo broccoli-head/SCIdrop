@@ -55,6 +55,7 @@ export default {
             errorMessage: '',
         };
     },
+    
     methods: {
         async handleRegister() {
             this.loading = true;
