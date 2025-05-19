@@ -72,14 +72,24 @@ export default {
             }
    
             try {
+                //gets csrf token required in register verification
+                const csrfResponse = await axios.get(
+					'http://localhost:8000/api/getCSRF/',
+					{ withCredentials: true }
+				);
+
                 //sends register request to the server
-                await axios.post('http://localhost:8000/api/register/', {
+                await axios.post('http://localhost:8000/api/register/',
+                {
                     username: this.username,
                     email: this.email,
                     password: this.password,
                 }, {
                     //needed for django csrf protecion
-                    withCredentials: true
+                    withCredentials: true,
+                    headers: {
+                        'X-CSRFToken': csrfResponse.data.CSRFToken
+                    }
                 });
                 
                 //gets user info (username)

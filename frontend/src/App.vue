@@ -8,8 +8,6 @@
 			</router-link>        
 		</h1>
 	</div>
-
-    <p v-if="isLoggedIn">Logged as <span class="orange">{{ username }}</span></p>
 	
 	<template v-if="!isLoggedIn">
 		<router-link to="/login">
@@ -22,6 +20,8 @@
 	</template>
 
 	<template v-else>
+		<p>Logged as <span class="orange">{{ username }}</span></p>
+		<p>Your balance: <span class="orange">{{ balance }}</span></p>
 		<button @click="handleLogout">Log out</button>
 	</template>
 	
@@ -40,21 +40,38 @@ export default {
 	data()  {
 		return {
 			isLoggedIn: false,
-			username: ''
+			username: '',
+			balance: '0.00 PLN'
 		};
 	},
 	mounted() {
 		this.checkLogin();
+		this.refreshBalance();
 	},
+
     methods: {
 		//checks login status and returns username
 		checkLogin() {
 			this.isLoggedIn = localStorage.getItem('isLoggedIn')  == 'true';
 			this.username = localStorage.getItem('username') || '';
 		},
+
+		async refreshBalance() {
+			try {
+				//gets balance from the backend
+				const response = await axios.get('http://localhost:8000/api/userInfo/', {
+					withCredentials: true
+				});
+
+				this.balance = response.data.balance + " PLN";
+			} catch (err) {
+				console.error('Failed to fetch user info:', err);
+			}
+		},
+
         async handleLogout() {
             try {
-				//gets csrf token required in login and register forms
+				//gets csrf token required to logout
 				const csrfResponse = await axios.get(
 					'http://localhost:8000/api/getCSRF/',
 					{ withCredentials: true }

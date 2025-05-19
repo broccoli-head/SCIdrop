@@ -50,13 +50,23 @@ export default {
             this.loading = true;
 
             try {
+                //gets csrf token required in login verification
+                const csrfResponse = await axios.get(
+					'http://localhost:8000/api/getCSRF/',
+					{ withCredentials: true }
+				);
+
                 //sends login request to the server
-                await axios.post('http://localhost:8000/api/login/', {
+                await axios.post('http://localhost:8000/api/login/',
+                {
                     username: this.username,
                     password: this.password,
                 }, {
                     //needed for django csrf protecion
-                    withCredentials: true
+                    withCredentials: true,
+                    headers: {
+                        'X-CSRFToken': csrfResponse.data.CSRFToken
+                    }
                 });
 
                 //gets user info (username)

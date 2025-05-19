@@ -6,8 +6,8 @@ from django.views.decorators.csrf import csrf_protect
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .models import Chest, Skin
-from .serializers import ChestSerializer
+from .models import Chest, Skin, UserInventory
+from .serializers import *
 
 
 @api_view(['GET'])
@@ -20,7 +20,7 @@ def getChests(request):
 @api_view(['GET'])
 def getSkins(request, chest_ID):
     skins = Skin.objects.filter(chestID = chest_ID)
-    serializer = ChestSerializer(skins, many = True, context = {'request': request})
+    serializer = SkinSerializer(skins, many = True, context = {'request': request})
     return Response(serializer.data)
 
 
@@ -29,8 +29,10 @@ def getCSRFToken(request):
     return Response({'CSRFToken': get_token(request)})
 
 
+@csrf_protect
 @api_view(['POST'])
 def registerAPI(request):
+
     username = request.data.get('username')
     email = request.data.get('email')
     password = request.data.get('password')
@@ -49,10 +51,13 @@ def registerAPI(request):
     
     else:
         user = User.objects.create_user(username = username, email = email, password = password)
+        UserInventory.objects.create(userID = user)
+        logout(request)
         login(request, user)
         return Response()
 
 
+@csrf_protect
 @api_view(['POST'])
 def loginAPI(request):
     username = request.data.get('username')
@@ -60,6 +65,7 @@ def loginAPI(request):
     user = authenticate(request, username = username, password = password)
 
     if user is not None:
+        logout(request)
         login(request, user)
         return Response()
     else:
@@ -76,6 +82,13 @@ def logoutAPI(request):
 @api_view(['GET'])
 def userInfo(request):
     if request.user.is_authenticated:
-        return Response({'username': request.user.username})
+        inventory = UserInventory.objects.get(userID = request.user.id)
+        serializer = InventorySerializer(inventory, context = {'request': request})
+        
+        return Response({
+            'username': request.user.username,
+            'balance': serializer.data.get('balance'),
+            'items': serializer.data.get('items')
+        })
     else:
-        return Response({'message': 'Not logged'}, status = 401)
+        return Response(status = 401)
