@@ -92,3 +92,8 @@ def userInfo(request):
         })
     else:
         return Response(status = 401)
+    
+
+@api_view(['POST'])
+def buyChest(request):
+    return Response()

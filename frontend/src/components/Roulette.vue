@@ -11,7 +11,11 @@
             </div>
         </div>
     </div>
-    <button id="spin" ref="spinButton" @click="spin">Spin</button>
+
+    <button v-if="isLoggedIn" id="spin" ref="spinButton" @click="spin">Spin</button>
+    <router-link v-else to="/login">
+        <button id="spin" ref="spinButton">Log in to spin</button>
+    </router-link>
 
     <div class="window" ref="window">
         <h1>You won:</h1>
@@ -27,16 +31,19 @@
 
 <script>
 import { refreshBalance } from '@/utils.js';
+import axios from 'axios';
 
 export default {
     data() {
         return {
+            isLoggedIn: false,
             skins: [],
             selected: []
         }
     },
     mounted() {
         this.loadSkins();
+        this.checkLogin();
         refreshBalance(this);
     },
 
@@ -60,6 +67,11 @@ export default {
             }
         },
 
+        //checks login status
+		checkLogin() {
+			this.isLoggedIn = localStorage.getItem('isLoggedIn')  == 'true';
+		},
+
         shuffleArray(array) {
             for(let i = array.length - 1; i > 0; i--) {
                 //randomize order of the array items
@@ -71,6 +83,14 @@ export default {
             return array;
         },
         
+        buy_chest() {
+            axios.post('http://localhost:8000/api/buyChest', {
+                chestID: this.$route.params.id
+            }, {
+                withCredentials: true
+            })
+        },
+
         spin() {
             const skinCount = this.skins.length;
             const skinList = this.$refs.skinList;

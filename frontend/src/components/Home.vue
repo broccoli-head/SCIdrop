@@ -6,7 +6,7 @@
 
     <div v-else id="chestList">
         <div v-for="chest in chests" :key="chest.id">
-            <div v-if="isLoggedIn">
+            <div>
                 <router-link class="chestBox" :to="`/chest/${chest.id}`">
                     <h2>{{ chest.name }}</h2>
                     <img :src="chest.cover ? chest.cover : '@/assets/icons/chest.svg'" />
@@ -14,14 +14,6 @@
                     <p class="rarity" :class="chest.rarity">{{ chest.rarity }}</p>
                     <p class="price">{{ chest.price }} ZŁ</p> 
                 </router-link>
-            </div>
-
-            <div v-else class="chestBox">
-                <h2>{{ chest.name }}</h2>
-                <img :src="chest.cover ? chest.cover : '@/assets/icons/chest.svg'" />
-
-                <p class="rarity" :class="chest.rarity">{{ chest.rarity }}</p>
-                <p class="price disabled">{{ chest.price }} ZŁ</p> 
             </div>
         </div>
     </div>
@@ -34,13 +26,11 @@ import { refreshBalance } from '@/utils.js';
 export default {
     data() {
         return {
-            isLoggedIn: false,
             chests: []
         }
     },
     mounted() {
         this.loadChests();
-        this.checkLogin();
 		refreshBalance(this);
     },
 
@@ -54,12 +44,7 @@ export default {
             } catch (err) {
                 console.error('Failed to fetch chests:', err);
             }
-        },
-
-        //checks login status
-		checkLogin() {
-			this.isLoggedIn = localStorage.getItem('isLoggedIn')  == 'true';
-		},
+        }
     }  
 }
 </script>
