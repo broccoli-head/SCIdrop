@@ -12,7 +12,8 @@
         </div>
     </div>
 
-    <button v-if="isLoggedIn" id="spin" ref="spinButton" @click="buyChest">SPIN - {{ chestPrice }} ZŁ</button>
+    <button v-if="isLoggedIn && canOpen" id="spin" ref="spinButton" @click="buyChest">SPIN - {{ chestPrice }} ZŁ</button>
+    <button v-else-if="isLoggedIn && !canOpen" id="disabledButton" ref="spinButton">NOT ENOUGH MONEY</button>
     <router-link v-else to="/login">
         <button id="spin" ref="spinButton">Log in to spin</button>
     </router-link>
@@ -38,11 +39,13 @@ export default {
     name: 'Roulette',
     data() {
         return {
+            csrfToken: '',
             isLoggedIn: false,
             skins: [],
             chestPrice: 0,
             wonSkin: '',
-            message: ''
+            message: '',
+            canOpen: false
         }
     },
     mounted() {
@@ -56,9 +59,17 @@ export default {
             const chestID = this.$route.params.id;
 
             try {
+                //gets csrf token required to buy chest
+                const csrfResponse = await axios.get(
+                    'http://localhost:8000/api/getCSRF/',
+                    { withCredentials: true }
+                );
+                this.csrfToken = csrfResponse.data.CSRFToken;
+
                 const chestResponse = await fetch('http://localhost:8000/api/chests');
                 const chestData = await chestResponse.json();
 
+                //sets price to display in the spin button
                 for(const chest of chestData) {
                     if(chest.id == chestID) {
                         this.chestPrice = chest.price;
@@ -76,6 +87,8 @@ export default {
                 }
                 this.skins.length = 400;    //cuts to 400 elements
 
+                this.checkBalance();
+
             } catch (err) {
                 console.error('Failed to fetch skins:', err);
             }
@@ -85,6 +98,29 @@ export default {
 		checkLogin() {
 			this.isLoggedIn = localStorage.getItem('isLoggedIn')  == 'true';
 		},
+
+        async checkBalance() {
+            try {
+                //gets user info (balance)
+                const userResponse = await axios.get(
+                    'http://localhost:8000/api/userInfo/',
+                    { withCredentials: true }
+                );
+
+                if (Number(userResponse.data.balance) >= Number(this.chestPrice)) {
+                    console.log("test");
+                    this.canOpen = true;
+                }
+            }
+            catch (error) {
+                if (error.response.data) {
+                    this.errorMessage = error.response.data.message || 'Cannot get user info';
+                }
+                else {
+                    this.errorMessage = 'Connection error occured.';
+                }
+            }
+        },
 
         shuffleArray(array) {
             for(let i = array.length - 1; i > 0; i--) {
@@ -99,19 +135,13 @@ export default {
         
         async buyChest() {
             try {
-                //gets csrf token required to buy chest
-                const csrfResponse = await axios.get(
-                    'http://localhost:8000/api/getCSRF/',
-                    { withCredentials: true }
-                );
-
                 const response = await axios.post('http://localhost:8000/api/buyChest/', {
                     chestID: this.$route.params.id
                 }, {
                     //needed for django csrf protecion
                     withCredentials: true,
                     headers: {
-                        'X-CSRFToken': csrfResponse.data.CSRFToken
+                        'X-CSRFToken': this.csrfToken
                     }
                 })
                 
@@ -152,8 +182,18 @@ export default {
             //e.g. index for 400 items: 0.9 * 400 = 360
             const skinIndex = skinCount - Math.floor(skinCount / 10);
 
-            //sets drawn skin on the specific index 
+            //sets drawn skin on the specific index
             this.skins[skinIndex] = this.wonSkin;
+            
+            //ensures to not repeat skins 
+            for (let i = -3; i < 4; i++) {
+                if (i == 0) continue;
+                while (this.skins[skinIndex + i].id == this.wonSkin.id) {
+                    let randomIndex = Math.floor(Math.random() * this.skins.length);
+                    this.skins[skinIndex + i] = this.skins[randomIndex]
+                }
+            }
+            
 
             //spins list from right to left
             let scrollTarget = 0;
