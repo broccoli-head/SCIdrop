@@ -12,17 +12,18 @@
         </div>
     </div>
 
-    <button v-if="isLoggedIn" id="spin" ref="spinButton" @click="spin">Spin</button>
+    <button v-if="isLoggedIn" id="spin" ref="spinButton" @click="buyChest">SPIN - {{ chestPrice }} ZŁ</button>
     <router-link v-else to="/login">
         <button id="spin" ref="spinButton">Log in to spin</button>
     </router-link>
+    <p class="error">{{ message }}</p>
 
     <div class="window" ref="window">
         <h1>You won:</h1>
-        <h2>{{ selected.name }}</h2>
-        <img :src="selected.cover" />
-        <p class="rarity" :class="selected.rarity">{{ selected.rarity }}</p>
-        <p class="price">{{ selected.price }} ZŁ</p>
+        <h2>{{ wonSkin.name }}</h2>
+        <img :src="wonSkin.cover" />
+        <p class="rarity" :class="wonSkin.rarity">{{ wonSkin.rarity }}</p>
+        <p class="price">{{ wonSkin.price }} ZŁ</p>
         <router-link to="/">
             <button>CLAIM</button>
         </router-link>
@@ -34,11 +35,14 @@ import { refreshBalance } from '@/utils.js';
 import axios from 'axios';
 
 export default {
+    name: 'Roulette',
     data() {
         return {
             isLoggedIn: false,
             skins: [],
-            selected: []
+            chestPrice: 0,
+            wonSkin: '',
+            message: ''
         }
     },
     mounted() {
@@ -50,11 +54,21 @@ export default {
     methods: {
         async loadSkins() {
             const chestID = this.$route.params.id;
+
             try {
-                const response = await fetch(`http://localhost:8000/api/skins/${chestID}/`);
-                const data = await response.json();
-                
-                const shuffled = this.shuffleArray(data);
+                const chestResponse = await fetch('http://localhost:8000/api/chests');
+                const chestData = await chestResponse.json();
+
+                for(const chest of chestData) {
+                    if(chest.id == chestID) {
+                        this.chestPrice = chest.price;
+                        break;
+                    }
+                }             
+
+                const skinsResponse = await fetch(`http://localhost:8000/api/skins/${chestID}/`);
+                const skinsData = await skinsResponse.json();
+                const shuffled = this.shuffleArray(skinsData);
                 
                 //fills the list with ca. 400 items
                 while (this.skins.length < 400) {
@@ -83,12 +97,44 @@ export default {
             return array;
         },
         
-        buy_chest() {
-            axios.post('http://localhost:8000/api/buyChest', {
-                chestID: this.$route.params.id
-            }, {
-                withCredentials: true
-            })
+        async buyChest() {
+            try {
+                //gets csrf token required to buy chest
+                const csrfResponse = await axios.get(
+                    'http://localhost:8000/api/getCSRF/',
+                    { withCredentials: true }
+                );
+
+                const response = await axios.post('http://localhost:8000/api/buyChest/', {
+                    chestID: this.$route.params.id
+                }, {
+                    //needed for django csrf protecion
+                    withCredentials: true,
+                    headers: {
+                        'X-CSRFToken': csrfResponse.data.CSRFToken
+                    }
+                })
+                
+                refreshBalance(this);
+
+                if(response.data.message) {
+                    this.message = response.data.message;
+                }
+                else {
+                    this.wonSkin = response.data.wonSkin;
+                    this.spin();
+                }
+                
+            }
+            catch(error) {
+                console.log(error);
+                if(error.response && error.response.data) {
+                    this.message = error.response.data.message || 'Spin failed. User balance has been secured.';
+                }
+                else {
+                    this.message = 'Connection error occured.';
+                }
+            }            
         },
 
         spin() {
@@ -105,8 +151,9 @@ export default {
             //gets the element positioned in the 90% of the list
             //e.g. index for 400 items: 0.9 * 400 = 360
             const skinIndex = skinCount - Math.floor(skinCount / 10);
-            this.selected = this.skins[skinIndex];
-            console.log(skinIndex);
+
+            //sets drawn skin on the specific index 
+            this.skins[skinIndex] = this.wonSkin;
 
             //spins list from right to left
             let scrollTarget = 0;

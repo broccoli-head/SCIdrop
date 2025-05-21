@@ -42,7 +42,7 @@ export default {
                 const data = await response.json();
                 this.chests = data;
             } catch (err) {
-                console.error('Failed to fetch chests:', err);
+                console.error('Failed to fetch chests: ', err);
             }
         }
     }  
