@@ -47,7 +47,6 @@ export default {
 
     methods: {
         async handleLogin() {
-            this.errorMessage = '';
             this.loading = true;
 
             try {
@@ -71,9 +70,10 @@ export default {
                 });
 
                 //gets user info (username)
-                const userResponse = await axios.get('http://localhost:8000/api/userInfo/', {
-                    withCredentials: true
-                });
+                const userResponse = await axios.get(
+                    'http://localhost:8000/api/userInfo/',
+                    { withCredentials: true }
+                );
 
                 //if user is logged in, sets in the session their username
                 if(userResponse.data.username) {
@@ -86,7 +86,8 @@ export default {
                     this.errorMessage = "Login failed.";
                 }
 
-            } catch (error) {
+            }
+            catch (error) {
                 if (error.response.data) {
                     this.errorMessage = error.response.data.message || 'Login failed.';
                 }

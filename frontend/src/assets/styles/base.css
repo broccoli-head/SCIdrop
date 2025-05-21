@@ -97,6 +97,10 @@ nav button {
     justify-content: center;
     align-items: center;
 }
+.error {
+    color: red;
+    font-size: 1.5em;
+}
 
 .common {
     color: rgb(72, 255, 124);
