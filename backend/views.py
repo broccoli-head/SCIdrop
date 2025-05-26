@@ -21,12 +21,21 @@ def getChests(request):
     return Response(serializer.data)
 
 
-#returns skins in json
+#returns skins from specific chest
 @api_view(['GET'])
-def getSkins(request, chest_ID):
+def getSkinsFromChest(request, chest_ID):
     skins = Skin.objects.filter(chestID = chest_ID)
     serializer = SkinSerializer(skins, many = True, context = {'request': request})
     return Response(serializer.data)
+
+
+#returns skins from specific chest
+@api_view(['GET'])
+def getAllSkins(request):
+    skins = Skin.objects.all()
+    serializer = SkinSerializer(skins, many = True, context = {'request': request})
+    return Response(serializer.data)
+
 
 
 #needed to forms validation

@@ -108,7 +108,6 @@ export default {
                 );
 
                 if (Number(userResponse.data.balance) >= Number(this.chestPrice)) {
-                    console.log("test");
                     this.canOpen = true;
                 }
             }

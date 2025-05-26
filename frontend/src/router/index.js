@@ -4,6 +4,7 @@ import Home from '@/components/Home.vue'
 import Login from '@/components/Login.vue'
 import Register from '@/components/Register.vue'
 import Roulette from '@/components/Roulette.vue'
+import Inventory from '@/components/Inventory.vue'
 
 import homeBg from '@/assets/images/home_background.png'
 import loginBg from '@/assets/images/login_background.png'
@@ -41,6 +42,14 @@ const routes = [
 	meta: {
 		title: 'SCIdrop - Chest opening',
 		background: rouletteBg
+	}
+},
+{
+	path: '/inventory',
+	component: Inventory,
+	meta: {
+		title: "SCIdrop - User's inventory",
+		background: homeBg
 	}
 }
 ]

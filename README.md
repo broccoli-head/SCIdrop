@@ -59,5 +59,5 @@ and unzip ```media.zip``` file in to the media folder. Hierarchy should look lik
 - JavaScript (with Vue, Vite and Axios)
 
 <b>Backend:</b>
-- Python (with Django  and Pillow)
+- Python (with Django and Pillow)
 - SQLite3

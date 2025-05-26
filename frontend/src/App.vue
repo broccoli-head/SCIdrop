@@ -26,6 +26,11 @@
 	<template v-else>
 		<p>Logged as <span class="orange">{{ username }}</span></p>
 		<p>Your balance: <span class="orange">{{ global.balance }}</span></p>
+		
+		<router-link to="/inventory">
+			<button>Inventory</button>
+		</router-link>
+
 		<button @click="handleLogout">Log out</button>
 	</template>
 	
