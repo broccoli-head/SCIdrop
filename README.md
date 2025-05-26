@@ -6,6 +6,8 @@ Simple website made with Django and Vue frameworks. It implements opening chests
 # ⚙️ Setup guide:
 ### The best way to start is to open two different terminals - one for backend commands, and another one for frontend
 
+### ❗You need to have installed Python3 and NPM
+
 ### 🔧 Backend:
 <b>1. Install necessary libraries (Pillow, Django):</b>
 ```

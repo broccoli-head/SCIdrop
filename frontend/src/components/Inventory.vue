@@ -1,21 +1,24 @@
 <template>
-<div>
     <div v-if="items.length == 0">
         <h1>You don't have any items yet. Gamble to earn some!</h1>
     </div>
 
-    <div v-else id="itemList">
-        <div v-for="item in items" :key="item.id">
-            <div>
+    <div v-else>
+        <h1 id="ownedTitle">Owned skins:</h1>
+        <div id="itemList">
+            <div v-for="item in items" :key="item.id" class="itemBox">
                 <h2>{{ item.name }}</h2>
                 <img :src="item.cover ? item.cover : '@/assets/icons/person.svg'" />
 
                 <p class="rarity" :class="item.rarity">{{ item.rarity }}</p>
-                <p class="price">{{ item.price }} ZŁ</p> 
+                <div class="info">
+                    <p>{{ item.price }} ZŁ</p>
+                    <p class="count">Count: {{ item.count }}</p>
+                </div> 
+                
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -48,8 +51,9 @@ export default {
 
                 for(const skin of skinsResponse.data) {
                     for(const item of userResponse.data.items) {
-                        if (skin.id == item.skinID) { 
-                            this.items.push(skin);
+                        if (skin.id == item.skinID) {
+                            const skinInfo = { ...skin, count: item.count };
+                            this.items.push(skinInfo);
                             break;
                         }
                     }

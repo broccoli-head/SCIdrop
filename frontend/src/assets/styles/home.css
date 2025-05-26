@@ -5,6 +5,7 @@ nav  {
 #chestList {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 50px;
     margin: 30px;
     margin-bottom: 0;

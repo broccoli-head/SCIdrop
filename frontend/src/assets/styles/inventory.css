@@ -1,0 +1,64 @@
+#itemList {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#ownedTitle {
+    color: #FECD7E;
+    text-shadow: 0 0 15px #ffcc00;
+    text-align: center;
+    font-family: "Arial Black";
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+.itemBox {
+    width: 240px;
+    height: 380px;
+    border-radius: 15px;
+    background-color: rgba(125, 84, 19, 0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.itemBox img {
+    height: 150px;
+}
+
+.itemBox h2 {
+    color: #ffdbb5;
+    font-family: "Arial Black";
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-shadow: 0 0 10px #ffdbb5;
+    word-spacing: 10px;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.itemBox .info {
+    font-size: 1em;
+    margin: 10px;
+    color: #FECD7E;
+    background-color: #944b10;
+    border-radius: 15px;
+    font-family: "Arial Black";
+    font-weight: bold;
+    text-align: center;
+    width: 100px
+}
+
+.itemBox .info p {
+    margin: 5px 0 5px 0;
+}
+
+.itemBox .rarity {
+    font-size: 1.3em;
+    font-family: "Arial Black";
+    text-transform: uppercase;
+    margin: 5px;
+}
