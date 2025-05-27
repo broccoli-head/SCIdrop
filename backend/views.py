@@ -123,6 +123,9 @@ def buyChest(request):
 
     #select for update locks inventory during transaction
     inventory = UserInventory.objects.select_for_update().get(userID = request.user.id)
+    
+    if not inventory.items:
+        inventory.items = []
 
     if inventory.balance < chest.price:
         return Response({'message': "You don't have enough money to buy that chest!"})

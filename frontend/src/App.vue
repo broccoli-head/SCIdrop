@@ -68,15 +68,17 @@ export default {
 
         async handleLogout() {
             try {
+				const url = import.meta.env.VITE_API_BASE_URL;
+
 				//gets csrf token required to logout
 				const csrfResponse = await axios.get(
-					'http://localhost:8000/api/getCSRF/',
+					`${url}/api/getCSRF/`,
 					{ withCredentials: true }
 				);
 
 				//logout request
                 await axios.post(
-					'http://localhost:8000/api/logout/',
+					`${url}/api/logout/`,
 					{ },
 					{
 						withCredentials: true,

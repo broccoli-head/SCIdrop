@@ -50,14 +50,16 @@ export default {
             this.loading = true;
 
             try {
+                const url = import.meta.env.VITE_API_BASE_URL;
+                
                 //gets csrf token required in login verification
                 const csrfResponse = await axios.get(
-					'http://localhost:8000/api/getCSRF/',
+					`${url}/api/getCSRF/`,
 					{ withCredentials: true }
 				);
 
                 //sends login request to the server
-                await axios.post('http://localhost:8000/api/login/',
+                await axios.post(`${url}/api/login/`,
                 {
                     username: this.username,
                     password: this.password,
@@ -71,7 +73,7 @@ export default {
 
                 //gets user info (username)
                 const userResponse = await axios.get(
-                    'http://localhost:8000/api/userInfo/',
+                    `${url}/api/userInfo/`,
                     { withCredentials: true }
                 );
 

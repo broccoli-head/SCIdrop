@@ -38,16 +38,17 @@ export default {
 
     methods: {
         async loadItems() {
-            try {
+            try {      
+                const url = import.meta.env.VITE_API_BASE_URL;
+
                 //gets user's items
                 const userResponse = await axios.get(
-                    'http://localhost:8000/api/userInfo',
+                    `${url}/api/userInfo/`,
                     { withCredentials: true }
                 );
 
-                const skinsResponse = await axios.get(
-                    'http://localhost:8000/api/skins'
-                )
+                //gets all existing skins
+                const skinsResponse = await axios.get(`${url}/api/skins/`)
 
                 for(const skin of skinsResponse.data) {
                     for(const item of userResponse.data.items) {

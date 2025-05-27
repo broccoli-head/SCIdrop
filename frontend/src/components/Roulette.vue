@@ -45,28 +45,35 @@ export default {
             chestPrice: 0,
             wonSkin: '',
             message: '',
-            canOpen: false
+            canOpen: false,
+            url: ''
         }
     },
     mounted() {
+        this.loadAPI();
         this.loadSkins();
         this.checkLogin();
         refreshBalance(this);
     },
 
     methods: {
+        async loadAPI() {
+            //loads url needed for api calls
+            this.url = import.meta.env.VITE_API_BASE_URL;
+        },
+
         async loadSkins() {
             const chestID = this.$route.params.id;
 
             try {
                 //gets csrf token required to buy chest
                 const csrfResponse = await axios.get(
-                    'http://localhost:8000/api/getCSRF/',
+                    `${this.url}/api/getCSRF/`,
                     { withCredentials: true }
                 );
                 this.csrfToken = csrfResponse.data.CSRFToken;
 
-                const chestResponse = await fetch('http://localhost:8000/api/chests');
+                const chestResponse = await fetch(`${this.url}/api/chests/`);
                 const chestData = await chestResponse.json();
 
                 //sets price to display in the spin button
@@ -77,7 +84,7 @@ export default {
                     }
                 }             
 
-                const skinsResponse = await fetch(`http://localhost:8000/api/skins/${chestID}/`);
+                const skinsResponse = await fetch(`${this.url}/api/skins/${chestID}/`);
                 const skinsData = await skinsResponse.json();
                 const shuffled = this.shuffleArray(skinsData);
                 
@@ -103,7 +110,7 @@ export default {
             try {
                 //gets user info (balance)
                 const userResponse = await axios.get(
-                    'http://localhost:8000/api/userInfo/',
+                    `${this.url}/api/userInfo/`,
                     { withCredentials: true }
                 );
 
@@ -134,7 +141,7 @@ export default {
         
         async buyChest() {
             try {
-                const response = await axios.post('http://localhost:8000/api/buyChest/', {
+                const response = await axios.post(`${this.url}/api/buyChest/`, {
                     chestID: this.$route.params.id
                 }, {
                     //needed for django csrf protecion

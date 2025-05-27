@@ -34,7 +34,8 @@ export default {
         async loadChests() {
             try {
                 //gets chests from the backend
-                const response = await fetch('http://localhost:8000/api/chests/');
+                const url = import.meta.env.VITE_API_BASE_URL;
+                const response = await fetch(`${url}/api/chests/`);
                 const data = await response.json();
                 this.chests = data;
             } catch (err) {

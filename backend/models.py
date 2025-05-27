@@ -28,4 +28,4 @@ class Skin(models.Model):
 class UserInventory(models.Model):
     userID = models.OneToOneField(User, on_delete = models.CASCADE)
     balance = models.DecimalField(default = 100, max_digits = 7, decimal_places = 2)
-    items = models.JSONField(default = dict, blank = True, null = True)
+    items = models.JSONField(default = list, blank = True, null = True)

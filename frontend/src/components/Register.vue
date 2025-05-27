@@ -73,14 +73,16 @@ export default {
             }
    
             try {
+                const url = import.meta.env.VITE_API_BASE_URL;
+
                 //gets csrf token required in register verification
                 const csrfResponse = await axios.get(
-					'http://localhost:8000/api/getCSRF/',
+					`${url}/api/getCSRF/`,
 					{ withCredentials: true }
 				);
 
                 //sends register request to the server
-                await axios.post('http://localhost:8000/api/register/',
+                await axios.post(`${url}/api/register/`,
                 {
                     username: this.username,
                     email: this.email,
@@ -95,7 +97,7 @@ export default {
                 
                 //gets user info (username)
                 const userResponse = await axios.get(
-                    'http://localhost:8000/api/userInfo/',
+                    `${url}/api/userInfo/`,
                     { withCredentials: true }
                 );
 
