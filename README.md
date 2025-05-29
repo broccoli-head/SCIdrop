@@ -6,7 +6,7 @@ Simple website made with Django and Vue frameworks. It implements opening chests
 # ⚙️ Setup guide:
 ### The best way to start is to open two different terminals - one for backend commands, and another one for frontend
 
-### ❗You need to have installed Python3 and NPM package manager
+### ❗You need to have **Python3** and **NPM package manager**  installed 
 
 ### 🔧 Backend:
 <b>1. Install necessary libraries (Pillow, Django):</b>
@@ -27,7 +27,7 @@ then:
 > python manage.py migrate
 ```
 
-<b>3. If you want to start with the example 2 chests, type:</b>
+<b>3. If you want to start with two example chests, type:</b>
 ```
 > python manage.py loaddata example_chests.json
 ```
@@ -63,3 +63,5 @@ and unzip ```media.zip``` file in to the media folder. Hierarchy should look lik
 <b>Backend:</b>
 - Python (with Django and Pillow)
 - SQLite3
+
+### 🎨 All drawings in media folder were made by Mewash

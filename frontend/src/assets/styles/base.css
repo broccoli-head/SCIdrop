@@ -4,16 +4,20 @@ body {
     background-color: #1A191F;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     color: white;
     font-family: "Calibri";
     scroll-behavior: smooth;
+    overflow: hidden;
 }
 
 main {
+    height: calc(100vh - 75px);
+    margin: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 85vh;
 }
 
 .logo {
@@ -39,14 +43,23 @@ main {
 .orange{
     color: #FECD7E;
 }
+
 .white {
     color: white;
+}
+
+.centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 nav {
     display: flex;
     align-items: center;
     width: 100vw;
+    height: 75px;
     gap: 30px;
     backdrop-filter: blur(5px);
     background-color: rgba(106, 87, 69, 0.4);
@@ -73,21 +86,31 @@ button {
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    box-shadow: 0 0 10px #e4a33c;
     transition: 0.3s ease-in-out;
 }
+
 button:hover {
-    background-color: #c49141;
+    background-color: #e4a33c;
+    transform: scale(1.02) translateY(-3px);
 }
+
 button:disabled {
     background-color: #9d8764;
     cursor: not-allowed;
 }
+
 button:disabled:hover {
     background-color: #d07373;
 }
 
 nav button {
     margin: 0;
+}
+
+nav button:hover {
+    background-color: #e4a33c;
+    transform: none;
 }
 
 .warning {
@@ -117,4 +140,15 @@ nav button {
 .legendary {
     color: rgb(255, 138, 49);
     text-shadow: 0 0 8px rgb(252, 105, 42);
+}
+
+
+/* transition between pages */
+.fade-enter-active, .fade-leave-active {
+    transition: 0.5s;
+}
+
+.fade-enter-from, .fade-leave-to {
+    opacity: 0;
+    transform: translateY(10vh);
 }

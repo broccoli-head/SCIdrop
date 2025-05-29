@@ -3,42 +3,44 @@
 </script>
 
 <template>
-<nav>
-	<div class="logo">
-		<img src="@/assets/icons/gift.svg">
-		<h1 class="boldTitle">
-			<router-link to="/">
-				<span class="orange">sci</span><span class="white">drop</span>
-			</router-link>        
-		</h1>
-	</div>
-	
-	<template v-if="!isLoggedIn">
-		<router-link to="/login">
-			<button>Log in</button>
-		</router-link>
-
-		<router-link to="/register">
-			<button>Sign up</button>
-		</router-link>
-	</template>
-
-	<template v-else>
-		<p>Logged as <span class="orange">{{ username }}</span></p>
-		<p>Your balance: <span class="orange">{{ global.balance }}</span></p>
+	<nav>
+		<div class="logo">
+			<img src="@/assets/icons/gift.svg">
+			<h1 class="boldTitle">
+				<router-link to="/">
+					<span class="orange">sci</span><span class="white">drop</span>
+				</router-link>        
+			</h1>
+		</div>
 		
-		<router-link to="/inventory">
-			<button>Inventory</button>
-		</router-link>
+		<template v-if="!isLoggedIn">
+			<router-link to="/login">
+				<button>Log in</button>
+			</router-link>
 
-		<button @click="handleLogout">Log out</button>
-	</template>
-	
-</nav>
+			<router-link to="/register">
+				<button>Sign up</button>
+			</router-link>
+		</template>
 
-<main>
-    <router-view />
-</main>
+		<template v-else>
+			<p>Logged as <span class="orange">{{ username }}</span></p>
+			<p>Your balance: <span class="orange">{{ global.balance }}</span></p>
+			
+			<router-link to="/inventory">
+				<button>Inventory</button>
+			</router-link>
+
+			<button @click="handleLogout">Log out</button>
+		</template>
+		
+	</nav>
+
+	<main>
+		<transition name="fade" mode="out-in">
+			<router-view />
+		</transition>
+	</main>
 </template>
 
 <script>

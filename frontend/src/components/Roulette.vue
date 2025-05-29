@@ -1,33 +1,42 @@
 <template>
-    <img class="triangle" src="@/assets/icons/triangle.svg" />
-    <div id="listOverlay" ref="listOverlay">
-        <div id="skinList" ref="skinList">
-            <div v-for="(skin, index) in skins" :key="index" class="skinBox">
-                <h2>{{ skin.name }}</h2>
-                <img :src="skin.cover" />
-                <p class="rarity" :class="skin.rarity">{{ skin.rarity }}</p>
-                <p class="price">{{ skin.price }} ZŁ</p>
-                <p class="index" ref="skinIndex">{{ index }}</p>
-            </div>
-        </div>
+    <div v-if="!isLoaded">
+        <h1>Loading...</h1>
     </div>
 
-    <button v-if="isLoggedIn && canOpen" id="spin" ref="spinButton" @click="buyChest">SPIN - {{ chestPrice }} ZŁ</button>
-    <button v-else-if="isLoggedIn && !canOpen" id="disabledButton" ref="spinButton">NOT ENOUGH MONEY</button>
-    <router-link v-else to="/login">
-        <button id="spin" ref="spinButton">Log in to spin</button>
-    </router-link>
-    <p class="error">{{ message }}</p>
+    <div v-else class="centered">
+        <img class="triangle" src="@/assets/icons/triangle.svg" />
+        <div id="listOverlay" ref="listOverlay">
+            <div id="skinList" ref="skinList">
+                <div v-for="(skin, index) in skins" :key="index" class="skinBox">
+                    <h2>{{ skin.name }}</h2>
+                    <img :src="skin.cover" />
+                    <p class="rarity" :class="skin.rarity">{{ skin.rarity }}</p>
+                    <p class="price">{{ skin.price }} ZŁ</p>
+                    <p class="index" ref="skinIndex">{{ index }}</p>
+                </div>
+            </div>
+        </div>
 
-    <div class="window" ref="window">
-        <h1>You won:</h1>
-        <h2>{{ wonSkin.name }}</h2>
-        <img :src="wonSkin.cover" />
-        <p class="rarity" :class="wonSkin.rarity">{{ wonSkin.rarity }}</p>
-        <p class="price">{{ wonSkin.price }} ZŁ</p>
-        <router-link to="/">
-            <button>CLAIM</button>
+        <div v-if="isLoggedIn && canOpen" id="spin">
+            <button ref="spinButton" @click="buyChest">SPIN - {{ chestPrice }} ZŁ</button>
+        </div>
+        <button v-else-if="isLoggedIn && !canOpen" id="disabledButton" ref="spinButton">NOT ENOUGH MONEY</button>
+
+        <router-link v-else to="/login">
+            <button id="spin" ref="spinButton">Log in to spin</button>
         </router-link>
+        <p class="error">{{ message }}</p>
+
+        <div class="window" ref="window">
+            <h1>You won:</h1>
+            <h2>{{ wonSkin.name }}</h2>
+            <img :src="wonSkin.cover" />
+            <p class="rarity" :class="wonSkin.rarity">{{ wonSkin.rarity }}</p>
+            <p class="price">{{ wonSkin.price }} ZŁ</p>
+            <router-link to="/">
+                <button>CLAIM</button>
+            </router-link>
+        </div>
     </div>
 </template>
 
@@ -39,6 +48,7 @@ export default {
     name: 'Roulette',
     data() {
         return {
+            isLoaded: false,
             csrfToken: '',
             isLoggedIn: false,
             skins: [],
@@ -94,6 +104,7 @@ export default {
                 }
                 this.skins.length = 400;    //cuts to 400 elements
 
+                this.isLoaded = true;
                 this.checkBalance();
 
             } catch (err) {
@@ -208,7 +219,7 @@ export default {
             
             //after 8s shows the window with won skin
             setTimeout(() => {
-                window.style.display = 'flex';
+                window.style.transform = 'scale(1)';
             }, 8000);
         }
     }

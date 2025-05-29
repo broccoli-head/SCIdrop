@@ -55,20 +55,30 @@ main {
 
 #spin {
     display: block;
-    margin: 0;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
+    transition: 0.3s ease-in-out;
+}
+
+#spin:hover {
+    transform: translateY(-10px) scale(1.1);
+}
+
+#spin button {
+    display: block;
+    margin-top: 40px;
     font-size: 2em;
     border: 5px solid white;
-    color: #5e3f0d;
     box-shadow: 0 0 10px white;
+    animation: colorChange 2s infinite alternate ease-in-out;
+}
+
+#spin button:disabled {
+    animation: none;
 }
 
 .triangle {
     width: 60px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px auto 10px;
+    display: block;
     filter: drop-shadow(0 0 10px white);
 }
 
@@ -79,22 +89,38 @@ main {
 .window {
     height: 500px;
     width: 350px;
-    display: none;
+    display: flex;
     position: absolute;
+    transform: scale(0);
     background-color: rgba(61, 44, 20, 0.6);
     backdrop-filter: blur(10px);
     padding: 5px 10px 5px 10px;
     border-radius: 10px;
-    border: solid 2px white;
-    box-shadow: 0 0 10px white;
+    border: solid 3px white;
+    box-shadow: 0 0 15px white;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    transition: 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 
 .window img {
     height: 200px;
+}
+
+.window button {
+    font-size: 1.3em;
+    padding: 12px;
+    box-shadow: 0 0 10px white, 0 0 20px #ffa639;
+    border: solid 3px white;
+    text-shadow: 0 0 10px rgb(255, 255, 255);
+    background-color: #ffa033;
+}
+
+.window button:hover {
+    background-color: #ff7700;
+    transform: scale(1.02) translateY(-3px);
 }
 
 #disabledButton {
@@ -113,4 +139,32 @@ main {
 
 #disabledButton:hover {
     background-color: #8e3a3a;
+}
+
+
+@keyframes colorChange {
+    0% {
+        background-color: rgb(255, 98, 58);
+        box-shadow: 0 0 20px rgb(255, 98, 58);
+        color: #862100;
+    }
+    25% {
+        background-color: rgb(255, 109, 36);
+        box-shadow: 0 0 20px rgb(255, 109, 36);
+    }
+    50% {
+        background-color: rgb(255, 123, 0);
+        box-shadow: 0 0 20px rgb(255, 123, 0);
+        color: #863c00;
+        transform: scale(1.1);
+    }
+    75% {
+        background-color: rgb(255, 166, 0);
+        box-shadow: 0 0 20px rgb(255, 166, 0);
+    }
+    100% {
+        background-color: rgb(238, 178, 0);
+        box-shadow: 0 0 20px rgb(238, 178, 0);
+        color: #75520c;
+    }
 }
