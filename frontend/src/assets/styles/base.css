@@ -9,6 +9,7 @@ body {
     font-family: "Calibri";
     scroll-behavior: smooth;
     overflow: hidden;
+    scrollbar-color: rgb(105, 71, 175) rgb(57, 18, 67);
 }
 
 main {

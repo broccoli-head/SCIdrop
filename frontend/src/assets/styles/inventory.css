@@ -1,3 +1,9 @@
+#inventory {
+    display: block;
+    height: calc(100vh - 78px);
+    overflow: auto;
+}
+
 #itemList {
     display: flex;
     flex-direction: row;
@@ -14,6 +20,8 @@
     font-family: "Arial Black";
     text-transform: uppercase;
     letter-spacing: 5px;
+    font-size: 2.5em;
+    margin: 40px 0 40px 0;
 }
 
 .itemBox {
@@ -41,6 +49,9 @@
     word-spacing: 10px;
     text-align: center;
     font-size: 1.3em;
+    height: 60px;
+    display: flex;
+    align-items: center;
 }
 
 .itemBox .info {
