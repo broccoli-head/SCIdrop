@@ -46,7 +46,7 @@ main {
     margin-bottom: 10px;
 }
 
-.skinBox .rarity, .window .rarity {
+.skinBox .rarity, #window .rarity {
     font-size: 1em;
     margin: 0;
     font-family: "Arial Black";
@@ -86,11 +86,26 @@ main {
     display: none;
 }
 
-.window {
+#windowOverlay {
+    width: 100vw;
+    height: calc(100vh - 78px);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: hidden;
+}
+
+#window {
     height: 500px;
     width: 350px;
     display: flex;
-    position: absolute;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     transform: scale(0);
     background-color: rgba(61, 44, 20, 0.6);
     backdrop-filter: blur(10px);
@@ -98,18 +113,15 @@ main {
     border-radius: 10px;
     border: solid 3px white;
     box-shadow: 0 0 15px white;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     text-align: center;
     transition: 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 
-.window img {
+#window img {
     height: 200px;
 }
 
-.window button {
+#window button {
     font-size: 1.3em;
     padding: 12px;
     box-shadow: 0 0 10px white, 0 0 20px #ffa639;
@@ -118,7 +130,7 @@ main {
     background-color: #ffa033;
 }
 
-.window button:hover {
+#window button:hover {
     background-color: #ff7700;
     transform: scale(1.02) translateY(-3px);
 }

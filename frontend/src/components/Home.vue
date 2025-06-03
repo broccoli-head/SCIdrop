@@ -3,7 +3,7 @@
         <h1>Currently, there are no chests to buy.</h1>
     </div>
 
-    <div v-else id="chestList">
+    <div v-else id="chestList" class="scrollY">
         <div v-for="chest in chests" :key="chest.id">
             <router-link class="chestBox" :to="`/chest/${chest.id}`">
                 <h2>{{ chest.name }}</h2>

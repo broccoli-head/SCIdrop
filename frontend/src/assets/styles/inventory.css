@@ -1,16 +1,10 @@
-#inventory {
-    display: block;
-    height: calc(100vh - 78px);
-    overflow: auto;
-}
-
 #itemList {
     display: flex;
     flex-direction: row;
-    gap: 20px;
     flex-wrap: wrap;
-    overflow-y: auto;
+    gap: 20px;
     justify-content: center;
+    margin-bottom: 30px;
 }
 
 #ownedTitle {

@@ -2,7 +2,7 @@
 Simple website made with Django and Vue frameworks. It implements opening chests with customisable skins. Everything works on the user's account balance based on the real currency.
 
 
-### Here you can watch [app preview video](https://youtu.be/OsMqisXqZE0)
+### 🎥 Here you can watch [video presenting the website](https://youtu.be/tjasRk32dJI)
 # ⚙️ Setup guide:
 ### The best way to start is to open two different terminals - one for backend commands, and another one for frontend
 

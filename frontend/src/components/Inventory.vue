@@ -3,7 +3,7 @@
         <h1>You don't have any items yet. Gamble to earn some!</h1>
     </div>
 
-    <div v-else id="inventory">
+    <div v-else class="scrollY">
         <h1 id="ownedTitle">Owned skins:</h1>
         <div id="itemList">
             <div v-for="item in items" :key="item.id" class="itemBox">

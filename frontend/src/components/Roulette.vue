@@ -3,7 +3,7 @@
         <h1>Loading...</h1>
     </div>
 
-    <div v-else class="centered">
+    <div v-else class="scrollY">
         <img class="triangle" src="@/assets/icons/triangle.svg" />
         <div id="listOverlay" ref="listOverlay">
             <div id="skinList" ref="skinList">
@@ -22,20 +22,22 @@
         </div>
         <button v-else-if="isLoggedIn && !canOpen" id="disabledButton" ref="spinButton">NOT ENOUGH MONEY</button>
 
-        <router-link v-else to="/login">
-            <button id="spin" ref="spinButton">Log in to spin</button>
+        <router-link v-else to="/login" id="spin">
+            <button ref="spinButton">Log in to spin</button>
         </router-link>
         <p class="error">{{ message }}</p>
 
-        <div class="window" ref="window">
-            <h1>You won:</h1>
-            <h2>{{ wonSkin.name }}</h2>
-            <img :src="wonSkin.cover" />
-            <p class="rarity" :class="wonSkin.rarity">{{ wonSkin.rarity }}</p>
-            <p class="price">{{ wonSkin.price }} ZŁ</p>
-            <router-link to="/">
-                <button>CLAIM</button>
-            </router-link>
+        <div id="windowOverlay" ref="windowOverlay">
+            <div id="window" ref="window">
+                <h1>You won:</h1>
+                <h2>{{ wonSkin.name }}</h2>
+                <img :src="wonSkin.cover" />
+                <p class="rarity" :class="wonSkin.rarity">{{ wonSkin.rarity }}</p>
+                <p class="price">{{ wonSkin.price }} ZŁ</p>
+                <router-link to="/">
+                    <button>CLAIM</button>
+                </router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -189,6 +191,7 @@ export default {
             const skinList = this.$refs.skinList;
             const container = this.$refs.skinList;
             const window = this.$refs.window;
+            const overlay = this.$refs.windowOverlay;
 
             const boxWidth = 140;   //width of the skin box
 
@@ -219,6 +222,8 @@ export default {
             
             //after 8s shows the window with won skin
             setTimeout(() => {
+                overlay.style.pointerEvents = 'all';
+                overlay.style.overflowY = 'auto';
                 window.style.transform = 'scale(1)';
             }, 8000);
         }
