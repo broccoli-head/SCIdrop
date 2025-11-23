@@ -1,8 +1,9 @@
 # 🎁 About SCIdrop
-Simple website made with Django and Vue frameworks. It implements opening chests with customisable skins. Everything works on the user's account balance based on the real currency.
+Simple website made with Django and Vue frameworks. It contains openable chests with custom items (e.g. skins for the SCImulator game). Everything works on the user's account balance based on the real currency.
 
+<img width="1932" height="1088" alt="image" src="https://github.com/user-attachments/assets/28f06f41-4a42-48de-943c-df093f1c6d5b" />
 
-### 🎥 Here you can watch [video presenting the website](https://youtu.be/tjasRk32dJI)
+### 🎥 Here you can watch [video presenting the website](https://youtu.be/tjasRk32dJI)<br><br>
 # ⚙️ Setup guide:
 ### The best way to start is to open two different terminals - one for backend commands, and another one for frontend
 
@@ -35,23 +36,23 @@ and unzip ```media.zip``` file in to the media folder. Hierarchy should look lik
 <br>
 ```SCIdrop/media/chestCovers``` and ```SCIdrop/media/skinCovers```
 
-<b> 4. To run backend API:</b>
+<b> 4. To run a backend API:</b>
 ```
 > python manage.py runserver
 ```
 
 ### 🖼️ Frontend:
-<b>1. Install all dependencies</b>
+<b>1. Install dependencies</b>
 ```
 > cd frontend
 > npm install
 ```
-<b>2. To run frontend:</b>
+<b>2. To run a frontend:</b>
 ```
 > npm run dev
 ```
 
-### To start, go in the browser to <b>```localhost:5173```</b>
+### To start, go to <b>```localhost:5173```</b><br><br>
 
 
 # 💻 Used technologies
@@ -64,4 +65,4 @@ and unzip ```media.zip``` file in to the media folder. Hierarchy should look lik
 - Python (with Django and Pillow)
 - SQLite3
 
-### 🎨 All drawings in media folder were made by Mewash
+### 🎨 All of the drawings in the media folder were made by Mewash
